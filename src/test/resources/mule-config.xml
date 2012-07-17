@@ -1,0 +1,93 @@
+<mule xmlns="http://www.mulesoft.org/schema/mule/core"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xmlns:spring="http://www.springframework.org/schema/beans"
+      xmlns:util="http://www.springframework.org/schema/util"
+      xmlns:mulexml="http://www.mulesoft.org/schema/mule/xml"
+      xmlns:jpa="http://www.mulesoft.org/schema/mule/jpa"
+      xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/3.3/mule.xsd
+        http://www.mulesoft.org/schema/mule/xml http://www.mulesoft.org/schema/mule/xml/3.3/mule-xml.xsd
+         http://www.springframework.org/schema/util
+       http://www.springframework.org/schema/util/spring-util-3.0.xsd
+        http://www.mulesoft.org/schema/mule/jpa http://www.mulesoft.org/schema/mule/jpa/1.0/mule-jpa.xsd">
+
+
+    <spring:beans>
+        <util:map id="jpaPropertyMap">
+            <spring:entry key="hibernate.hbm2ddl.auto" value="create-drop"/>
+            <spring:entry key="hibernate.dialect" value="org.hibernate.dialect.HSQLDialect"/>
+            <spring:entry key="hibernate.ejb.naming_strategy" value="org.hibernate.cfg.ImprovedNamingStrategy"/>
+            <spring:entry key="hibernate.connection.charSet" value="UTF-8"/>
+        </util:map>
+
+        <spring:bean class="org.apache.commons.dbcp.BasicDataSource"
+                     destroy-method="close" id="dataSource">
+            <spring:property name="driverClassName" value="org.hsqldb.jdbcDriver"/>
+            <spring:property name="url" value="jdbc:hsqldb:mem:mule"/>
+        </spring:bean>
+
+        <spring:bean class="org.springframework.orm.jpa.JpaTransactionManager" id="transactionManager">
+            <spring:property name="entityManagerFactory" ref="entityManagerFactory"/>
+        </spring:bean>
+
+        <spring:bean id="sessionFactory" factory-bean="entityManagerFactory" factory-method="getSessionFactory"/>
+
+        <spring:bean id="hibernateVendor" class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+            <spring:property name="showSql" value="true"/>
+        </spring:bean>
+
+        <spring:bean class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"
+                     id="entityManagerFactory">
+            <spring:property name="jpaVendorAdapter" ref="hibernateVendor"/>
+            <spring:property name="jpaPropertyMap" ref="jpaPropertyMap"/>
+            <spring:property name="dataSource" ref="dataSource"/>
+            <spring:property name="packagesToScan" value="domain"/>
+        </spring:bean>
+
+    </spring:beans>
+
+    <jpa:config entityManagerFactory-ref="entityManagerFactory"/>
+
+    <flow name="testInsert">
+        <jpa:persist/>
+    </flow>
+
+    <flow name="testDetach">
+        <jpa:detach/>
+    </flow>
+
+    <flow name="testMerge">
+        <jpa:merge/>
+    </flow>
+
+    <flow name="testFind">
+        <jpa:find entityClass="domain.Dog"/>
+    </flow>
+
+    <flow name="testQuery">
+        <jpa:query statement="from Dog dog where dog.name = 'Cujo'"/>
+    </flow>
+
+    <flow name="testQueryWithListParameters">
+        <jpa:query statement="from Dog dog where dog.name = ?"/>
+    </flow>
+
+    <flow name="testQueryWithMapParameters">
+        <jpa:query statement="from Dog dog where dog.name = :name"/>
+    </flow>
+
+    <flow name="testNamedQuery">
+        <jpa:query namedQuery='findDogsByName'/>
+    </flow>
+
+    <flow name="testTransactionalInsertAndQuery">
+        <transactional>
+            <jpa:persist/>
+            <jpa:query statement="from Dog dog where dog.name = 'Cujo'"/>
+        </transactional>
+    </flow>
+
+
+</mule>
+    
