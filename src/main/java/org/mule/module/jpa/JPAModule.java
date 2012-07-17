@@ -24,7 +24,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Java Persistence Architecture (JPA) support for Mule.
+ * Java Persistence API (JPA) support for Mule.
  *
  * @author John D'Emic <john.demic@mulesoft.com>
  */

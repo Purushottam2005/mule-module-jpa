@@ -6,7 +6,7 @@
     <artifactId>mule-module-jpa</artifactId>
     <version>1.0</version>
     <packaging>mule-module</packaging>
-    <name>Mule Java Persistence Architecture Module</name>
+    <name>Mule Java Persistence API Module</name>
 
     <properties>
         <mule.version>3.3.0</mule.version>

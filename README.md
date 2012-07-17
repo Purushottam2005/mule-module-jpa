@@ -1,7 +1,7 @@
 Mule JPA Module
 ====================
 
-Mule Module support for the Java Persistence Architecture.
+Mule Module support for the Java Persistence API.
 
 Installation and Usage
 ----------------------
