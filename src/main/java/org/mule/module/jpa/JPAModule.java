@@ -11,6 +11,7 @@ import org.mule.api.MuleMessage;
 import org.mule.api.annotations.Configurable;
 import org.mule.api.annotations.Module;
 import org.mule.api.annotations.Processor;
+import org.mule.api.annotations.display.Icons;
 import org.mule.api.annotations.param.Optional;
 import org.mule.api.context.MuleContextAware;
 import org.mule.api.transaction.Transaction;
@@ -29,6 +30,13 @@ import java.util.Map;
  * @author John D'Emic <john.demic@mulesoft.com>
  */
 @Module(name = "jpa", schemaVersion = "1.0")
+@Icons(connectorSmall = "../../../icons/JPAModule-connector-24x16.png",
+        connectorLarge = "../../../icons/JPAModule-connector-48x32.png",
+        endpointSmall = "../../../icons/JPAModule-endpoint-24x16.png",
+        endpointLarge = "../../../icons/JPAModule-endpoint-48x32.png",
+        transformerSmall = "../../../icons/JPAModule-transformer-24x16.png",
+        transformerLarge = "../../../icons/JPAModule-transformer-48x32.png")
+
 public class JPAModule implements MuleContextAware {
 
     protected transient Log logger = LogFactory.getLog(getClass());
