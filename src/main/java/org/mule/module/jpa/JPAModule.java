@@ -158,7 +158,9 @@ public class JPAModule implements MuleContextAware {
     }
 
     /**
-     * Command pattern implementation for JPA commands.
+     * Command pattern implementation for JPA commands. The rationale behind this is to wrap the transaction
+     * demarcations around the JPA Commands, to avoid cut and pasting the transaction logic (or trying to use the
+     * Transactional annotation.)
      */
     Object perform(MuleMessage message, JPACommand command, Map<String, Object> parameters) throws Exception {
 
@@ -169,6 +171,7 @@ public class JPAModule implements MuleContextAware {
 
         JPATransaction transaction = getTransactionalResource();
 
+        // If we have a null JPATransaction here then we need to "locally" manage the transaction for this MP.
         if (transaction == null) {
             localTransaction = true;
             transaction = (JPATransaction) new
@@ -196,7 +199,11 @@ public class JPAModule implements MuleContextAware {
 
     /**
      * Returns a <code>JPATransaction</code> or null depending on whether or not this module's message processors
-     * are running inside a <transactional></transactional> block.
+     * are running inside a <transactional></transactional> block.  This code will return a <code>JPATransaction</code>
+     * if the processors are running inside a <transactional></transactional> block and null if not.  A null
+     * value signifies we need to manually create the JPATransaction with the JPATransactionFactory to "locally"
+     * manage non-explicit transaction.  This essentially means that each of the processors in this module run in their
+     * own transaction unless they are inside a <transactional>block</transactional>.
      */
     @SuppressWarnings({"unchecked"})
     final public <T> T getTransactionalResource() throws MuleException {
