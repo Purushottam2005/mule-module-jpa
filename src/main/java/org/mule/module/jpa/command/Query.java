@@ -9,25 +9,31 @@ import javax.persistence.criteria.CriteriaQuery;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Perform a JPA query operation
+ */
 @SuppressWarnings({"unchecked"})
 public class Query implements JPACommand {
 
     protected transient Log logger = LogFactory.getLog(getClass());
 
-    public Object execute(EntityManager entityManager, Object entity, Map<String, Object> parameters) throws Exception {
+    public Object execute(EntityManager entityManager, Object payload, Map<String, Object> parameters) throws Exception {
 
-        if (entity instanceof CriteriaQuery) {
-            return entityManager.createQuery((CriteriaQuery) entity).getResultList();
+        if (payload instanceof CriteriaQuery) {
+            logger.debug("Executing CriteriaQuery: " + payload);
+            return entityManager.createQuery((CriteriaQuery) payload).getResultList();
         } else if (parameters.containsKey("namedQuery")) {
+            logger.debug("Executing Named Query: " + parameters.get("namedQuery"));
             javax.persistence.Query query = entityManager.createNamedQuery((String) parameters.get("namedQuery"));
-            if (entity != null) {
-                setParametersFromPayload(entity, query);
+            if (payload != null) {
+                setParametersFromPayload(payload, query);
             }
             return query.getResultList();
         } else if (parameters.containsKey("statement")) {
+            logger.debug("Executing JPQL statement: " + parameters.get("statement"));
             javax.persistence.Query query = entityManager.createQuery((String) parameters.get("statement"));
-            if (entity != null) {
-                setParametersFromPayload(entity, query);
+            if (payload != null) {
+                setParametersFromPayload(payload, query);
             }
             return query.getResultList();
         }
@@ -38,11 +44,15 @@ public class Query implements JPACommand {
         if (entity instanceof Map) {
             Map<String, Object> parameters = (Map<String, Object>) entity;
             for (String key : parameters.keySet()) {
+                if (logger.isDebugEnabled())
+                    logger.debug(String.format("Setting query parameter %s to %s", key, parameters.get(key)));
                 query.setParameter(key, parameters.get(key));
             }
         } else if (entity instanceof List) {
             List parameters = (List) entity;
             for (int i = 0; i < parameters.size(); i++) {
+                if (logger.isDebugEnabled())
+                    logger.debug(String.format("Setting query parameter index %d to %s", i + 1, parameters.get(i)));
                 query.setParameter(i + 1, parameters.get(i));
             }
         } else {

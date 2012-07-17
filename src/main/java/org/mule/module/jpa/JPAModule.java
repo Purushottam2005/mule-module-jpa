@@ -68,7 +68,20 @@ public class JPAModule implements MuleContextAware {
     public Object query(MuleMessage message, @Optional String statement, @Optional String namedQuery)
             throws Exception {
 
+        if (logger.isDebugEnabled()) {
+            if (StringUtils.isNotBlank(statement)) {
+                logger.debug(String.format("Performing query with statement %s and parameters %s", statement,
+                        message.getPayload()));
+            } else if (StringUtils.isNotBlank(namedQuery)) {
+                logger.debug(String.format("Performing query with named query %s and parameters %s", statement,
+                        message.getPayload()));
+            } else {
+                logger.debug("Attempting criteria query with payload: " + message.getPayload());
+            }
+        }
+
         Map<String, Object> parameters = new HashMap<String, Object>();
+
         if (StringUtils.isNotBlank(statement)) {
             parameters.put("statement", statement);
         }
@@ -94,6 +107,7 @@ public class JPAModule implements MuleContextAware {
      */
     @Processor
     public Object persist(MuleMessage message) throws Exception {
+        logger.debug("Persisting: " + message.getPayloadAsString());
         return perform(message, new Persist(), null);
     }
 
@@ -107,6 +121,7 @@ public class JPAModule implements MuleContextAware {
      */
     @Processor
     public Object merge(MuleMessage message) throws Exception {
+        logger.debug("Merging: " + message.getPayloadAsString());
         return perform(message, new Merge(), null);
     }
 
@@ -121,6 +136,8 @@ public class JPAModule implements MuleContextAware {
      */
     @Processor
     public Object find(MuleMessage message, String entityClass) throws Exception {
+        logger.debug(String.format("Finding entity of class: %s with primary key: %s", entityClass,
+                message.getPayloadAsString()));
         Map<String, Object> parameters = new HashMap<String, Object>();
         parameters.put("entityClass", entityClass);
         return perform(message, new Find(), parameters);
@@ -136,6 +153,7 @@ public class JPAModule implements MuleContextAware {
      */
     @Processor
     public Object detach(MuleMessage message) throws Exception {
+        logger.debug("Detaching: " + message.getPayloadAsString());
         return perform(message, new Detach(), null);
     }
 
@@ -143,6 +161,9 @@ public class JPAModule implements MuleContextAware {
      * Command pattern implementation for JPA commands.
      */
     Object perform(MuleMessage message, JPACommand command, Map<String, Object> parameters) throws Exception {
+
+        logger.debug(String.format("Executing JPA command with message: %s, command: %s and parameters: %s",
+                message, command, parameters));
 
         boolean localTransaction = false;
 

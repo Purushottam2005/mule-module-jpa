@@ -8,6 +8,9 @@ import org.mule.api.transaction.TransactionFactory;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
+/**
+ * <code>TransactionFactory</code> implementation used to create <code>JPATransactions</code>
+ */
 public class JPATransactionFactory implements TransactionFactory {
 
     EntityManagerFactory entityManagerFactory;
