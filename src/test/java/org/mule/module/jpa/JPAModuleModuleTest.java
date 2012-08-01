@@ -47,6 +47,16 @@ public class JPAModuleModuleTest extends FunctionalTestCase {
         runFlowWithPayloadAndExpect("testTransactionalInsertAndQuery", expectedResults, dog);
     }
 
+    @Test
+    public void testCanInjectPersistenceContext() throws Exception {
+        Dog dog = new Dog();
+        dog.setName("Cujo");
+        List<Dog> expectedResults = new ArrayList<Dog>();
+        expectedResults.add(dog);
+        runFlowWithPayloadAndExpect("testPersistenceContext", expectedResults, dog);
+    }
+
+
 
     @Test
     public void testCanInsert() throws Exception {

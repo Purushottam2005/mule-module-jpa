@@ -104,6 +104,14 @@
         </transactional>
     </flow>
 
+    <flow name="testPersistenceContext" processingStrategy="synchronous">
+        <transactional>
+            <jpa:persist/>
+            <component class="service.DogServiceImpl"/>
+            <jpa:query statement="from Dog dog where dog.name = 'Cujo'"/>
+        </transactional>
+    </flow>
+
 
 </mule>
     
