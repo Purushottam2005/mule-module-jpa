@@ -179,7 +179,7 @@ public class JPAModule implements MuleContextAware {
         JPATransaction transaction = getTransactionalResource();
 
         if (transaction == null) {
-           throw new JPAException("No transaction present");
+           throw new IllegalStateException("No transaction is currently active");
         }
 
         return command.execute(transaction.getEntityManager(), message.getPayload(), parameters);

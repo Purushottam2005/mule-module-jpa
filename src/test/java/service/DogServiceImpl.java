@@ -2,7 +2,6 @@ package service;
 
 import domain.Dog;
 
-import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 

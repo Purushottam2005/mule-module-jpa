@@ -19,7 +19,7 @@ public class MuleEntityManager implements EntityManager {
     EntityManager getEntityManager() {
         Transaction tx = TransactionCoordination.getInstance().getTransaction();
         if (tx == null) {
-            throw new JPAException("No transaction present");
+            throw new IllegalStateException("No transaction is currently active");
         }
         return ((JPATransaction) tx).getEntityManager();
     }
