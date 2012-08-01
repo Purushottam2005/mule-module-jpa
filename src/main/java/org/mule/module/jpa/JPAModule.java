@@ -173,36 +173,16 @@ public class JPAModule implements MuleContextAware {
     Object perform(MuleMessage message, JPACommand command, Map<String, Object> parameters) throws Exception {
 
         logger.debug(String.format("Executing JPA command with message: %s, command: %s and parameters: %s",
-                message, command, parameters));
+                message.getPayloadAsString(), command, parameters));
 
-        boolean localTransaction = false;
 
         JPATransaction transaction = getTransactionalResource();
 
-        // If we have a null JPATransaction here then we need to "locally" manage the transaction for this MP.
         if (transaction == null) {
-            localTransaction = true;
-            transaction = (JPATransaction) new
-                    JPATransactionFactory(entityManagerFactory).beginTransaction(muleContext);
+           throw new JPAException("No transaction present");
         }
 
-        Object result = message.getPayload();
-
-        try {
-            result = command.execute(transaction.getEntityManager(), message.getPayload(), parameters);
-            if (localTransaction)
-                transaction.commit();
-        } catch (Exception e) {
-            if (localTransaction) {
-                transaction.rollback();
-            }
-            throw e;
-        } finally {
-            if (localTransaction)
-                transaction.doClose();
-        }
-
-        return result;
+        return command.execute(transaction.getEntityManager(), message.getPayload(), parameters);
     }
 
     /**

@@ -50,38 +50,54 @@
     <jpa:config entityManagerFactory-ref="entityManagerFactory"/>
 
     <flow name="testInsert">
-        <jpa:persist/>
+        <transactional>
+            <jpa:persist/>
+        </transactional>
     </flow>
 
     <flow name="testDetach">
-        <jpa:detach/>
+        <transactional>
+            <jpa:detach/>
+        </transactional>
     </flow>
 
     <flow name="testMerge">
-        <jpa:merge/>
+        <transactional>
+            <jpa:merge/>
+        </transactional>
     </flow>
 
     <flow name="testFind">
-        <jpa:find entityClass="domain.Dog"/>
+        <transactional>
+            <jpa:find entityClass="domain.Dog"/>
+        </transactional>
     </flow>
 
     <flow name="testQuery">
-        <jpa:query statement="from Dog dog where dog.name = 'Cujo'"/>
+        <transactional>
+            <jpa:query statement="from Dog dog where dog.name = 'Cujo'"/>
+        </transactional>
     </flow>
 
     <flow name="testQueryWithListParameters">
-        <jpa:query statement="from Dog dog where dog.name = ?"/>
+        <transactional>
+            <jpa:query statement="from Dog dog where dog.name = ?"/>
+        </transactional>
     </flow>
 
     <flow name="testQueryWithMapParameters">
-        <jpa:query statement="from Dog dog where dog.name = :name"/>
+        <transactional>
+            <jpa:query statement="from Dog dog where dog.name = :name"/>
+        </transactional>
     </flow>
 
     <flow name="testNamedQuery">
-        <jpa:query namedQuery='findDogsByName'/>
+        <transactional>
+            <jpa:query namedQuery='findDogsByName'/>
+        </transactional>
     </flow>
 
-    <flow name="testTransactionalInsertAndQuery">
+    <flow name="testTransactionalInsertAndQuery" processingStrategy="synchronous">
         <transactional>
             <jpa:persist/>
             <jpa:query statement="from Dog dog where dog.name = 'Cujo'"/>
