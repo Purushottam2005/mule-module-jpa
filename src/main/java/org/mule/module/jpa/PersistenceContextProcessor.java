@@ -29,9 +29,13 @@ public class PersistenceContextProcessor implements InjectProcessor {
         }
         for (Field field : fields) {
             if (field.isAnnotationPresent(PersistenceContext.class)) {
+                field.setAccessible(true);
                 try {
-                    field.setAccessible(true);
-                    field.set(object, new MuleEntityManager());
+                    if (field.get(object) == null) {
+                        field.set(object, new MuleEntityManager());
+                    } else {
+                        logger.warn("The PersistenceContext has already been injected");
+                    }
                 } catch (RequiredValueException e) {
                     throw e;
                 } catch (Exception e) {
