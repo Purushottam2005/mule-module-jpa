@@ -4,9 +4,12 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.mule.api.MuleContext;
 import org.mule.api.transaction.TransactionException;
+import org.mule.config.i18n.CoreMessages;
 import org.mule.transaction.AbstractSingleResourceTransaction;
+import org.mule.transaction.IllegalTransactionStateException;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 
 /**
@@ -33,9 +36,20 @@ public class JPATransaction extends AbstractSingleResourceTransaction
     }
 
     @Override
+    public void bindResource(Object key, Object resource) throws TransactionException
+    {
+        logger.debug("Binding JPA transaction: " + super.getId());
+        if (!(key instanceof EntityManagerFactory) || !(resource instanceof EntityManager))
+        {
+            throw new IllegalTransactionStateException(
+                CoreMessages.transactionCanOnlyBindToResources("javax.persistence.EntityManagerFactory/javax.persistence.EntityManager"));
+        }
+        super.bindResource(key, resource);
+    }
+
+    @Override
     protected void doBegin() throws TransactionException {
-        logger.debug("Beginning JPA transaction: " + super.getId());
-        transaction.begin();
+        //Do nothing
     }
 
     @Override

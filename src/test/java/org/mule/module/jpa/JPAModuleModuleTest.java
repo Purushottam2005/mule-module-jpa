@@ -7,10 +7,9 @@ import domain.Dog;
 import org.junit.Before;
 import org.mule.api.MuleEvent;
 import org.mule.construct.Flow;
-import org.mule.tck.FunctionalTestCase;
-import org.mule.tck.AbstractMuleTestCase;
 
 import org.junit.Test;
+import org.mule.tck.junit4.FunctionalTestCase;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -23,7 +22,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class JPAModuleModuleTest extends FunctionalTestCase {
+import static org.junit.Assert.*;
+
+public class JPAModuleModuleTest extends FunctionalTestCase
+{
     @Override
     protected String getConfigResources() {
         return "mule-config.xml";
@@ -46,7 +48,6 @@ public class JPAModuleModuleTest extends FunctionalTestCase {
 
         runFlowWithPayloadAndExpect("testTransactionalInsertAndQuery", expectedResults, dog);
     }
-
     @Test
     public void testCanInjectPersistenceContext() throws Exception {
         Dog dog = new Dog();
@@ -221,7 +222,7 @@ public class JPAModuleModuleTest extends FunctionalTestCase {
      */
     protected <T> void runFlowAndExpect(String flowName, T expect) throws Exception {
         Flow flow = lookupFlowConstruct(flowName);
-        MuleEvent event = AbstractMuleTestCase.getTestEvent(null);
+        MuleEvent event = getTestEvent(null);
         MuleEvent responseEvent = flow.process(event);
 
         assertEquals(expect, responseEvent.getMessage().getPayload());
@@ -237,7 +238,7 @@ public class JPAModuleModuleTest extends FunctionalTestCase {
      */
     protected <T, U> void runFlowWithPayloadAndExpect(String flowName, T expect, U payload) throws Exception {
         Flow flow = lookupFlowConstruct(flowName);
-        MuleEvent event = AbstractMuleTestCase.getTestEvent(payload);
+        MuleEvent event = getTestEvent(payload);
         MuleEvent responseEvent = flow.process(event);
 
         assertEquals(expect, responseEvent.getMessage().getPayload());
@@ -249,6 +250,6 @@ public class JPAModuleModuleTest extends FunctionalTestCase {
      * @param name Name of the flow to retrieve
      */
     protected Flow lookupFlowConstruct(String name) {
-        return (Flow) AbstractMuleTestCase.muleContext.getRegistry().lookupFlowConstruct(name);
+        return (Flow) muleContext.getRegistry().lookupFlowConstruct(name);
     }
 }

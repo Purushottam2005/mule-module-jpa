@@ -15,11 +15,14 @@ import org.mule.api.annotations.display.Icons;
 import org.mule.api.annotations.param.Optional;
 import org.mule.api.context.MuleContextAware;
 import org.mule.api.transaction.Transaction;
+import org.mule.api.transaction.TransactionException;
+import org.mule.config.i18n.CoreMessages;
 import org.mule.module.jpa.command.*;
 import org.mule.transaction.TransactionCoordination;
 import org.mule.util.StringUtils;
 
 import javax.annotation.PostConstruct;
+import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import java.util.HashMap;
 import java.util.Map;
@@ -51,7 +54,7 @@ public class JPAModule implements MuleContextAware {
 
     @PostConstruct
     public void connect() throws Exception {
-        muleContext.getTransactionFactoryManager().registerTransactionFactory(JPATransactionFactory.class,
+        muleContext.getTransactionFactoryManager().registerTransactionFactory(EntityManagerFactory.class,
                 new JPATransactionFactory(entityManagerFactory));
     }
 
@@ -176,13 +179,13 @@ public class JPAModule implements MuleContextAware {
                 message.getPayloadAsString(), command, parameters));
 
 
-        JPATransaction transaction = getTransactionalResource();
+        EntityManager entityManager = getTransactionalResource();
 
-        if (transaction == null) {
+        if (entityManager == null) {
            throw new IllegalStateException("No transaction is currently active");
         }
 
-        return command.execute(transaction.getEntityManager(), message.getPayload(), parameters);
+        return command.execute(entityManager, message.getPayload(), parameters);
     }
 
     /**
@@ -196,21 +199,31 @@ public class JPAModule implements MuleContextAware {
     @SuppressWarnings({"unchecked"})
     final public <T> T getTransactionalResource() throws MuleException {
         Transaction currentTx = TransactionCoordination.getInstance().getTransaction();
-        if (currentTx != null) {
-            JPATransactionFactory jpaTransactionFactory = new JPATransactionFactory(entityManagerFactory);
-
-            if (currentTx.hasResource(jpaTransactionFactory)) {
-                return (T) currentTx.getResource(jpaTransactionFactory);
-            } else {
-                Object connectionResource = jpaTransactionFactory.beginTransaction(muleContext);
-                if (currentTx.supports(jpaTransactionFactory, connectionResource)) {
-                    currentTx.bindResource(jpaTransactionFactory, connectionResource);
+        if (currentTx != null)
+        {
+            if (currentTx.hasResource(entityManagerFactory))
+            {
+                return (T) currentTx.getResource(entityManagerFactory);
+            }
+            else
+            {
+                Object connectionResource = entityManagerFactory.createEntityManager();
+                if (currentTx.supports(entityManagerFactory,connectionResource))
+                {
+                    currentTx.bindResource(entityManagerFactory, connectionResource);
+                }
+                else
+                {
+                    throw new TransactionException(CoreMessages.createStaticMessage("Endpoint is transactional but transaction does not support it"));
                 }
                 return (T) connectionResource;
             }
-        } else {
-            return null;
         }
+        else
+        {
+            return (T) entityManagerFactory.createEntityManager();
+        }
+        
     }
 
     public void setEntityManagerFactory(EntityManagerFactory entityManagerFactory) {
