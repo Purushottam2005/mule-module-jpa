@@ -8,15 +8,13 @@ import org.mule.transaction.TransactionCoordination;
 
 import javax.persistence.EntityManagerFactory;
 
+/**
+ * Utility methods for JPA.
+ */
 public class JPAUtils {
 
     /**
-     * Returns a <code>JPATransaction</code> or null depending on whether or not this module's message processors
-     * are running inside a <transactional></transactional> block.  This code will return a <code>JPATransaction</code>
-     * if the processors are running inside a <transactional></transactional> block and null if not.  A null
-     * value signifies we need to manually create the JPATransaction with the JPATransactionFactory to "locally"
-     * manage non-explicit transaction.  This essentially means that each of the processors in this module run in their
-     * own transaction unless they are inside a <transactional>block</transactional>.
+     * Fetches an EntityManager in a transaction-aware manner.
      */
     @SuppressWarnings({"unchecked"})
     static public <T> T getTransactionalResource(EntityManagerFactory entityManagerFactory) {

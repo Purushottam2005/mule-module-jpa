@@ -169,9 +169,7 @@ public class JPAModule implements MuleContextAware {
     }
 
     /**
-     * Command pattern implementation for JPA commands. The rationale behind this is to wrap the transaction
-     * demarcations around the JPA Commands, to avoid cut and pasting the transaction logic (or trying to use the
-     * Transactional annotation.)
+     * Command pattern implementation for JPA commands.
      */
     Object perform(MuleMessage message, JPACommand command, Map<String, Object> parameters) throws Exception {
 
@@ -181,7 +179,7 @@ public class JPAModule implements MuleContextAware {
         EntityManager entityManager = JPAUtils.getTransactionalResource(entityManagerFactory);
 
         if (entityManager == null) {
-            throw new IllegalStateException("No transaction is currently active");
+            throw new IllegalStateException("Could not obtain an EntityManager");
         }
 
         return command.execute(entityManager, message.getPayload(), parameters);
