@@ -19,28 +19,30 @@ public class Query implements JPACommand {
 
     public Object execute(EntityManager entityManager, Object payload, Map<String, Object> parameters) throws Exception {
 
-        if (payload instanceof CriteriaQuery) {
-            logger.debug("Executing CriteriaQuery: " + payload);
-            return entityManager.createQuery((CriteriaQuery) payload).getResultList();
+        Object queryParameters = parameters.get("queryParameters");
+
+        if (queryParameters instanceof CriteriaQuery) {
+            logger.debug("Executing CriteriaQuery: " + queryParameters);
+            return entityManager.createQuery((CriteriaQuery) queryParameters).getResultList();
         } else if (parameters.containsKey("namedQuery")) {
             logger.debug("Executing Named Query: " + parameters.get("namedQuery"));
             javax.persistence.Query query = entityManager.createNamedQuery((String) parameters.get("namedQuery"));
-            if (payload != null) {
-                setParametersFromPayload(payload, query);
+            if (queryParameters != null) {
+                setParameters(queryParameters, query);
             }
             return query.getResultList();
         } else if (parameters.containsKey("statement")) {
             logger.debug("Executing JPQL statement: " + parameters.get("statement"));
             javax.persistence.Query query = entityManager.createQuery((String) parameters.get("statement"));
-            if (payload != null) {
-                setParametersFromPayload(payload, query);
+            if (queryParameters != null) {
+                setParameters(queryParameters, query);
             }
             return query.getResultList();
         }
-        throw new JPAException("Couldn't resolve query from either the payload or the statement attribute");
+        throw new JPAException("Couldn't resolve query from either the query parameters or the statement attribute");
     }
 
-    void setParametersFromPayload(Object entity, javax.persistence.Query query) {
+    void setParameters(Object entity, javax.persistence.Query query) {
         if (entity instanceof Map) {
             Map<String, Object> parameters = (Map<String, Object>) entity;
             for (String key : parameters.keySet()) {

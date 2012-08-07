@@ -71,41 +71,45 @@ public class JPAModule implements MuleContextAware {
      *
      * @param message    The <code>MuleMessage</code>.  If the payload is an instance of a <code>List</code>
      *                   or a <code>Map</code> then the payload is used as the query parameters.
-     * @param statement  a JPQL statement to execute
+     * @param statement  a JPA QL statement to execute
      * @param namedQuery a named query to execute
+     * @param queryParameters the query parameters
      * @return The query results
      */
     @Processor
-    public Object query(MuleMessage message, @Optional String statement, @Optional String namedQuery)
+    public Object query(MuleMessage message, @Optional String statement, @Optional String namedQuery,
+                        @Optional Object queryParameters)
             throws Exception {
 
         if (logger.isDebugEnabled()) {
             if (StringUtils.isNotBlank(statement)) {
                 logger.debug(String.format("Performing query with statement %s and parameters %s", statement,
-                        message.getPayload()));
+                        queryParameters));
             } else if (StringUtils.isNotBlank(namedQuery)) {
                 logger.debug(String.format("Performing query with named query %s and parameters %s", statement,
-                        message.getPayload()));
+                        queryParameters));
             } else {
                 logger.debug("Attempting criteria query with payload: " + message.getPayload());
             }
         }
 
-        Map<String, Object> parameters = new HashMap<String, Object>();
+        Map<String, Object> parameterMap = new HashMap<String, Object>();
 
         if (StringUtils.isNotBlank(statement)) {
-            parameters.put("statement", statement);
+            parameterMap.put("statement", statement);
         }
 
         if (StringUtils.isNotBlank(namedQuery)) {
-            parameters.put("namedQuery", statement);
+            parameterMap.put("namedQuery", statement);
         }
 
         if (namedQuery != null) {
-            parameters.put("namedQuery", namedQuery);
+            parameterMap.put("namedQuery", namedQuery);
         }
 
-        return perform(message, new Query(), parameters);
+        parameterMap.put("queryParameters", queryParameters);
+
+        return perform(message, new Query(), parameterMap);
     }
 
     /**
@@ -143,14 +147,17 @@ public class JPAModule implements MuleContextAware {
      *
      * @param message     The <code>MuleMessage</code>. This processor assumes the payload contains the entity's primary key.
      * @param entityClass The class of the entity to find.
+     * @param id The ID of the entity to find.
+     *
      * @return The entity or null if it isn't found.
      */
     @Processor
-    public Object find(MuleMessage message, String entityClass) throws Exception {
+    public Object find(MuleMessage message, String entityClass, Object id) throws Exception {
         logger.debug(String.format("Finding entity of class: %s with primary key: %s", entityClass,
                 message.getPayloadAsString()));
         Map<String, Object> parameters = new HashMap<String, Object>();
         parameters.put("entityClass", entityClass);
+        parameters.put("id", id);
         return perform(message, new Find(), parameters);
     }
 

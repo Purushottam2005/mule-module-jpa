@@ -1,5 +1,5 @@
 <!-- BEGIN_INCLUDE(jpa:query) -->
-<jpa:query statement="select * from Dog" />
+<jpa:query statement="select * from Dog" queryParameters="#[payload:]" />
 <!-- END_INCLUDE(jpa:query) -->
 
 <!-- BEGIN_INCLUDE(jpa:persist) -->

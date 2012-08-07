@@ -69,7 +69,7 @@
 
     <flow name="testFind">
         <transactional>
-            <jpa:find entityClass="domain.Dog"/>
+            <jpa:find entityClass="domain.Dog" id-ref="#[payload:]"/>
         </transactional>
     </flow>
 
@@ -81,19 +81,19 @@
 
     <flow name="testQueryWithListParameters">
         <transactional>
-            <jpa:query statement="from Dog dog where dog.name = ?"/>
+            <jpa:query statement="from Dog dog where dog.name = ?" queryParameters-ref="#[payload:]"/>
         </transactional>
     </flow>
 
     <flow name="testQueryWithMapParameters">
         <transactional>
-            <jpa:query statement="from Dog dog where dog.name = :name"/>
+            <jpa:query statement="from Dog dog where dog.name = :name" queryParameters-ref="#[payload:]"/>
         </transactional>
     </flow>
 
     <flow name="testNamedQuery">
         <transactional>
-            <jpa:query namedQuery='findDogsByName'/>
+            <jpa:query namedQuery='findDogsByName' queryParameters-ref="#[payload:]"/>
         </transactional>
     </flow>
 
