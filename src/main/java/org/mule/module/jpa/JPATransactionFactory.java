@@ -11,29 +11,20 @@ import javax.persistence.EntityManagerFactory;
 /**
  * <code>TransactionFactory</code> implementation used to create <code>JPATransactions</code>
  */
-public class JPATransactionFactory implements UniversalTransactionFactory
-{
+public class JPATransactionFactory implements UniversalTransactionFactory {
 
-    EntityManagerFactory entityManagerFactory;
-
-    public JPATransactionFactory(EntityManagerFactory entityManagerFactory) {
-        this.entityManagerFactory = entityManagerFactory;
+    public JPATransactionFactory() {
     }
 
     public Transaction beginTransaction(MuleContext muleContext) throws TransactionException {
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        JPATransaction jpaTransaction = new JPATransaction(muleContext, entityManager);
-        jpaTransaction.begin();
-        return jpaTransaction;
+        return new JPATransaction(muleContext);
     }
 
     public boolean isTransacted() {
         return true;
     }
 
-    public Transaction createUnboundTransaction(MuleContext muleContext) throws TransactionException
-    {
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        return new JPATransaction(muleContext, entityManager);
+    public Transaction createUnboundTransaction(MuleContext muleContext) throws TransactionException {
+        return new JPATransaction(muleContext);
     }
 }

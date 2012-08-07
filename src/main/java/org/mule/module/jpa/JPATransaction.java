@@ -16,19 +16,14 @@ import javax.persistence.EntityTransaction;
  * <code>SingleResourceTransaction</code> implementation for JPA.  This class essentially provides a wrapper around
  * an <code>EntityTransaction</code>.
  */
-public class JPATransaction extends AbstractSingleResourceTransaction
-{
-
+public class JPATransaction extends AbstractSingleResourceTransaction {
     protected transient Log logger = LogFactory.getLog(getClass());
 
     EntityManager entityManager;
     EntityTransaction transaction;
 
-    public JPATransaction(MuleContext muleContext, EntityManager entityManager) {
+    public JPATransaction(MuleContext muleContext) {
         super(muleContext);
-        this.entityManager = entityManager;
-        transaction = entityManager.getTransaction();
-        transaction.begin();
     }
 
     public EntityManager getEntityManager() {
@@ -36,20 +31,21 @@ public class JPATransaction extends AbstractSingleResourceTransaction
     }
 
     @Override
-    public void bindResource(Object key, Object resource) throws TransactionException
-    {
+    public void bindResource(Object key, Object resource) throws TransactionException {
         logger.debug("Binding JPA transaction: " + super.getId());
-        if (!(key instanceof EntityManagerFactory) || !(resource instanceof EntityManager))
-        {
+        if (!(key instanceof EntityManagerFactory) || !(resource instanceof EntityManager)) {
             throw new IllegalTransactionStateException(
-                CoreMessages.transactionCanOnlyBindToResources("javax.persistence.EntityManagerFactory/javax.persistence.EntityManager"));
+                    CoreMessages.transactionCanOnlyBindToResources("javax.persistence.EntityManagerFactory/javax.persistence.EntityManager"));
         }
+        entityManager = (EntityManager) resource;
+        transaction = entityManager.getTransaction();
+        transaction.begin();
         super.bindResource(key, resource);
     }
 
     @Override
     protected void doBegin() throws TransactionException {
-        //Do nothing
+        // NOOP
     }
 
     @Override
@@ -64,7 +60,4 @@ public class JPATransaction extends AbstractSingleResourceTransaction
         transaction.rollback();
     }
 
-    void doClose() {
-        entityManager.close();
-    }
 }

@@ -16,12 +16,14 @@ import java.util.Map;
  */
 public class MuleEntityManager implements EntityManager {
 
+    EntityManagerFactory entityManagerFactory;
+
+    public MuleEntityManager(EntityManagerFactory entityManagerFactory) {
+        this.entityManagerFactory = entityManagerFactory;
+    }
+
     EntityManager getEntityManager() {
-        Transaction tx = TransactionCoordination.getInstance().getTransaction();
-        if (tx == null) {
-            throw new IllegalStateException("No transaction is currently active");
-        }
-        return ((JPATransaction) tx).getEntityManager();
+       return JPAUtils.getTransactionalResource(entityManagerFactory);
     }
 
     public void persist(Object entity) {

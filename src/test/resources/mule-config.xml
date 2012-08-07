@@ -97,14 +97,14 @@
         </transactional>
     </flow>
 
-    <flow name="testTransactionalInsertAndQuery" processingStrategy="synchronous">
+    <flow name="testTransactionalInsertAndQuery">
         <transactional>
             <jpa:persist/>
             <jpa:query statement="from Dog dog where dog.name = 'Cujo'"/>
         </transactional>
     </flow>
 
-    <flow name="testPersistenceContext" processingStrategy="synchronous">
+    <flow name="testPersistenceContext">
         <transactional>
             <jpa:persist/>
             <component class="service.DogServiceImpl"/>
