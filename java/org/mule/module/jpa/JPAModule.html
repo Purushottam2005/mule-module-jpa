@@ -628,7 +628,7 @@ Summary:
             <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Object.html">Object</a></nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../org/mule/module/jpa/JPAModule.html#find(org.mule.api.MuleMessage, java.lang.String)">find</a></span>(MuleMessage message, <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/String.html">String</a> entityClass)</nobr>
+        <span class="sympad"><a href="../../../../../org/mule/module/jpa/JPAModule.html#find(org.mule.api.MuleMessage, java.lang.String, java.lang.Object)">find</a></span>(MuleMessage message, <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/String.html">String</a> entityClass, <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Object.html">Object</a> id)</nobr>
         
         <div class="jd-descrdiv">Looks up an entity using the message's payload as the primary key.</div>
   
@@ -682,7 +682,7 @@ Summary:
             <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Object.html">Object</a></nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../org/mule/module/jpa/JPAModule.html#query(org.mule.api.MuleMessage, java.lang.String, java.lang.String)">query</a></span>(MuleMessage message, <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/String.html">String</a> statement, <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/String.html">String</a> namedQuery)</nobr>
+        <span class="sympad"><a href="../../../../../org/mule/module/jpa/JPAModule.html#query(org.mule.api.MuleMessage, java.lang.String, java.lang.String, java.lang.Object)">query</a></span>(MuleMessage message, <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/String.html">String</a> statement, <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/String.html">String</a> namedQuery, <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Object.html">Object</a> queryParameters)</nobr>
         
         <div class="jd-descrdiv">Execute a JPA query.</div>
   
@@ -1253,7 +1253,7 @@ From interface
 </div>
 
 
-<A NAME="find(org.mule.api.MuleMessage, java.lang.String)"></A>
+<A NAME="find(org.mule.api.MuleMessage, java.lang.String, java.lang.Object)"></A>
 
 <div class="jd-details api apilevel-"> 
     <h4 class="jd-details-title">
@@ -1266,7 +1266,7 @@ From interface
         <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Object.html">Object</a>
       </span>
       <span class="sympad">find</span>
-      <span class="normal">(MuleMessage message, <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/String.html">String</a> entityClass)</span>
+      <span class="normal">(MuleMessage message, <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/String.html">String</a> entityClass, <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Object.html">Object</a> id)</span>
     </h4>
       <div class="api-level">
         <div>
@@ -1291,6 +1291,10 @@ From interface
         <tr>
           <th>entityClass</td>
           <td>The class of the entity to find.</td>
+        </tr>
+        <tr>
+          <th>id</td>
+          <td>The ID of the entity to find.</td>
         </tr>
       </table>
   </div>
@@ -1425,7 +1429,7 @@ From interface
 </div>
 
 
-<A NAME="query(org.mule.api.MuleMessage, java.lang.String, java.lang.String)"></A>
+<A NAME="query(org.mule.api.MuleMessage, java.lang.String, java.lang.String, java.lang.Object)"></A>
 
 <div class="jd-details api apilevel-"> 
     <h4 class="jd-details-title">
@@ -1438,7 +1442,7 @@ From interface
         <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Object.html">Object</a>
       </span>
       <span class="sympad">query</span>
-      <span class="normal">(MuleMessage message, <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/String.html">String</a> statement, <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/String.html">String</a> namedQuery)</span>
+      <span class="normal">(MuleMessage message, <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/String.html">String</a> statement, <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/String.html">String</a> namedQuery, <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Object.html">Object</a> queryParameters)</span>
     </h4>
       <div class="api-level">
         <div>
@@ -1465,11 +1469,15 @@ From interface
         </tr>
         <tr>
           <th>statement</td>
-          <td>A JPQL statement to execute</td>
+          <td>A JPA QL statement to execute</td>
         </tr>
         <tr>
           <th>namedQuery</td>
           <td>A named query to execute</td>
+        </tr>
+        <tr>
+          <th>queryParameters</td>
+          <td>The query parameters</td>
         </tr>
       </table>
   </div>

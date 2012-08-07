@@ -509,7 +509,7 @@ Summary:
             <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Object.html">Object</a></nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/jpa/command/Find.html#execute(javax.persistence.EntityManager, java.lang.Object, java.util.Map<java.lang.String, java.lang.Object>)">execute</a></span>(EntityManager entityManager, <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Object.html">Object</a> primaryKey, <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/util/Map.html">Map</a>&lt;<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/String.html">String</a>,&nbsp;<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Object.html">Object</a>&gt; parameters)</nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/module/jpa/command/Find.html#execute(javax.persistence.EntityManager, java.lang.Object, java.util.Map<java.lang.String, java.lang.Object>)">execute</a></span>(EntityManager entityManager, <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Object.html">Object</a> message, <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/util/Map.html">Map</a>&lt;<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/String.html">String</a>,&nbsp;<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Object.html">Object</a>&gt; parameters)</nobr>
         
         <div class="jd-descrdiv">Performs the JPA operations exposed by implementing classes (ie, persist, merge, etc.)</div>
   
@@ -906,7 +906,7 @@ From interface
         <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Object.html">Object</a>
       </span>
       <span class="sympad">execute</span>
-      <span class="normal">(EntityManager entityManager, <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Object.html">Object</a> primaryKey, <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/util/Map.html">Map</a>&lt;<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/String.html">String</a>,&nbsp;<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Object.html">Object</a>&gt; parameters)</span>
+      <span class="normal">(EntityManager entityManager, <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Object.html">Object</a> message, <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/util/Map.html">Map</a>&lt;<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/String.html">String</a>,&nbsp;<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Object.html">Object</a>&gt; parameters)</span>
     </h4>
       <div class="api-level">
         <div>
@@ -927,7 +927,7 @@ From interface
           <td>The entityManager</td>
         </tr>
         <tr>
-          <th>primaryKey</td>
+          <th>message</td>
           <td>The message's payload.  Typically an instance of an entity class, but could also be a primary key
                       or query parameters depending on the operation.</td>
         </tr>
