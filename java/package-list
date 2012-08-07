@@ -1,0 +1,6 @@
+org.mule.module.jpa
+org.mule.module.jpa.adapters
+org.mule.module.jpa.command
+org.mule.module.jpa.config
+org.mule.module.jpa.processors
+

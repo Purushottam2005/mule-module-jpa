@@ -1,0 +1,3753 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+  <meta name="description" content="Documentation for Mule Java Persistence API Module." />
+
+<link rel="shortcut icon" type="image/x-icon" href="../../../../../favicon.ico" />
+<title>
+
+  MuleEntityManager
+
+
+| Mule Java Persistence API Module
+
+</title>
+<link href="../../../../../assets/mule-developer-docs.css" rel="stylesheet" type="text/css" />
+<link href="../../../../../assets/mule-developer-prettify.css" rel="stylesheet" type="text/css" />
+<link href="../../../../../assets/customizations.css" rel="stylesheet" type="text/css" />
+<link href='http://fonts.googleapis.com/css?family=Ubuntu:300' rel='stylesheet' type='text/css'>
+<script src="../../../../../assets/search_autocomplete.js" type="text/javascript"></script>
+<script src="../../../../../assets/jquery-resizable.min.js" type="text/javascript"></script>
+<script src="../../../../../assets/jquery-toc.js" type="text/javascript"></script>
+<script src="../../../../../assets/mule-developer-docs.js" type="text/javascript"></script>
+<script src="../../../../../assets/prettify.js" type="text/javascript"></script>
+<script type="text/javascript">
+  setToRoot("../../../../../", "../../../../../assets/");
+</script>
+<script src="../../../../../assets/mule-developer-reference.js" type="text/javascript"></script>
+<script src="../../../../../assets/navtree_data.js" type="text/javascript"></script>
+<script src="../../../../../assets/customizations.js" type="text/javascript"></script>
+<noscript>
+  <style type="text/css">
+    html,body{overflow:auto;}
+    #body-content{position:relative; top:0;}
+    #doc-content{overflow:visible;border-left:3px solid #666;}
+    #side-nav{padding:0;}
+    #side-nav .toggle-list ul {display:block;}
+    #resize-packages-nav{border-bottom:3px solid #666;}
+  </style>
+</noscript>
+<script type="text/javascript" charset="utf-8">
+  var is_ssl = ("https:" == document.location.protocol);
+  var asset_host = is_ssl ? "https://s3.amazonaws.com/getsatisfaction.com/" : "http://s3.amazonaws.com/getsatisfaction.com/";
+  document.write(unescape("%3Cscript src='" + asset_host + "javascripts/feedback-v2.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+<script type="text/javascript" charset="utf-8">
+  var feedback_widget_options = {};
+
+  feedback_widget_options.display = "overlay";
+  feedback_widget_options.company = "mulesoft";
+  feedback_widget_options.placement = "right";
+  feedback_widget_options.color = "#2F74AE";
+  feedback_widget_options.style = "question";
+
+  feedback_widget_options.tag = "Mule Java Persistence API Module";
+
+  feedback_widget_options.limit = "3";
+
+  var feedback_widget = new GSFN.feedback_widget(feedback_widget_options);
+</script>
+</head>
+
+<body class="">
+
+<div id="header">
+    <div id="headerLeft">
+    
+      <span id="masthead-title">Mule Java Persistence API Module</span>
+    
+    <ul id="header-tabs" class="">
+    
+    	<li id="guide"><a href="../../../../../guide/install.html">
+	    	<span class="en">Install Guide</span>
+    	</a></li>
+    
+    	<li id="java"><a href="../../../../../java/packages.html">
+	    	<span class="en">Java API Reference</span>
+    	</a></li>
+    
+    	<li id="mule"><a href="../../../../../mule/modules.html">
+	    	<span class="en">Mule API Reference</span>
+    	</a></li>
+    
+    </ul>
+    </div>
+    <div id="headerRight">
+      <a href="http://www.mulesoft.com" tabindex="-1">
+      <img src="../../../../../assets//images/mulesoft-logo-final.gif" alt="MuleSoft" border="0" id="mulesoftlogo"></a><br/>
+      
+  <div id="search" >
+      <div id="searchForm">
+          <form accept-charset="utf-8" class="gsc-search-box" 
+                onsubmit="return submit_search()">
+            <table class="gsc-search-box" cellpadding="0" cellspacing="0"><tbody>
+                <tr>
+                  <td class="gsc-input">
+                    <input id="search_autocomplete" class="gsc-input" type="text" size="33" autocomplete="off"
+                      title="search developer docs" name="q"
+                      value="search developer docs"
+                      onFocus="search_focus_changed(this, true)"
+                      onBlur="search_focus_changed(this, false)"
+                      onkeydown="return search_changed(event, true, '../../../../../')"
+                      onkeyup="return search_changed(event, false, '../../../../../')" />
+                  <div id="search_filtered_div" class="no-display">
+                      <table id="search_filtered" cellspacing=0>
+                      </table>
+                  </div>
+                  </td>
+                  <td class="gsc-search-button">
+                    <input type="submit" value="Search" title="search" id="search-button" class="gsc-search-button" />
+                  </td>
+                  <td class="gsc-clear-button">
+                    <div title="clear results" class="gsc-clear-button">&nbsp;</div>
+                  </td>
+                </tr></tbody>
+              </table>
+          </form>
+      </div><!-- searchForm -->
+  </div><!-- search -->
+      
+    </div>
+</div><!-- header -->
+
+
+  <div class="g-section g-tpl-240" id="body-content">
+    <div class="g-unit g-first side-nav-resizable" id="side-nav">
+      <div id="swapper">
+        <div id="nav-panels">
+          <div id="resize-packages-nav">
+            <div id="packages-nav">
+              <div id="index-links">
+                <a href="../../../../../java/packages.html"  >Package Index</a> |
+                <a href="../../../../../java/classes.html" >Class Index</a>
+              </div>
+              <ul>
+                
+    <li class="selected api apilevel-">
+  <a href="../../../../../java/org/mule/module/jpa/package-summary.html">org.mule.module.jpa</a></li>
+    <li class="api apilevel-">
+  <a href="../../../../../java/org/mule/module/jpa/adapters/package-summary.html">org.mule.module.jpa.adapters</a></li>
+    <li class="api apilevel-">
+  <a href="../../../../../java/org/mule/module/jpa/command/package-summary.html">org.mule.module.jpa.command</a></li>
+    <li class="api apilevel-">
+  <a href="../../../../../java/org/mule/module/jpa/config/package-summary.html">org.mule.module.jpa.config</a></li>
+    <li class="api apilevel-">
+  <a href="../../../../../java/org/mule/module/jpa/processors/package-summary.html">org.mule.module.jpa.processors</a></li>
+              </ul><br/>
+            </div> <!-- end packages -->
+          </div> <!-- end resize-packages -->
+          <div id="classes-nav">
+            <ul>
+              
+              
+    <li><h2>Classes</h2>
+      <ul>
+          <li class="api apilevel-"><a href="../../../../../java/org/mule/module/jpa/JPAModule.html">JPAModule</a></li>
+          <li class="api apilevel-"><a href="../../../../../java/org/mule/module/jpa/JPATransaction.html">JPATransaction</a></li>
+          <li class="api apilevel-"><a href="../../../../../java/org/mule/module/jpa/JPATransactionFactory.html">JPATransactionFactory</a></li>
+          <li class="api apilevel-"><a href="../../../../../java/org/mule/module/jpa/JPAUtils.html">JPAUtils</a></li>
+          <li class="selected api apilevel-"><a href="../../../../../java/org/mule/module/jpa/MuleEntityManager.html">MuleEntityManager</a></li>
+          <li class="api apilevel-"><a href="../../../../../java/org/mule/module/jpa/PersistenceContextProcessor.html">PersistenceContextProcessor</a></li>
+      </ul>
+    </li>
+              
+              
+              
+    <li><h2>Exceptions</h2>
+      <ul>
+          <li class="api apilevel-"><a href="../../../../../java/org/mule/module/jpa/JPAException.html">JPAException</a></li>
+      </ul>
+    </li>
+              
+            </ul><br/>
+          </div><!-- end classes -->
+        </div><!-- end nav-panels -->
+        <div id="nav-tree" style="display:none">
+          <div id="index-links">
+            <a href="../../../../../packages.html"  >Package Index</a> | 
+            <a href="../../../../../classes.html" >Class Index</a>
+          </div>
+        </div><!-- end nav-tree -->
+      </div><!-- end swapper -->
+    </div> <!-- end side-nav -->
+    <script>
+      if (!isMobile) {
+        $("<a href='#' id='nav-swap' onclick='swapNav();return false;' style='font-size:10px;line-height:9px;margin-left:1em;text-decoration:none;'><span id='tree-link'>Use Tree Navigation</span><span id='panel-link' style='display:none'>Use Panel Navigation</span></a>").appendTo("#side-nav");
+        chooseDefaultNav();
+        if ($("#nav-tree").is(':visible')) {
+          init_default_navtree("../../../../../");
+        } else {
+          addLoadEvent(function() {
+            scrollIntoView("packages-nav");
+            scrollIntoView("classes-nav");
+          });
+        }
+        $("#swapper").css({borderBottom:"2px solid #aaa"});
+      } else {
+        swapNav(); // tree view should be used on mobile
+      }
+    </script>
+
+
+
+<div class="g-unit" id="doc-content">
+
+<div id="api-info-block">
+
+
+
+  
+   
+  
+  
+  
+  
+
+  
+   
+  
+  
+  
+  
+
+
+<div class="sum-details-links">
+
+
+Summary:
+
+
+
+
+
+
+
+  <a href="#lfields">Fields</a>
+  
+
+
+
+  &#124; <a href="#pubctors">Ctors</a>
+  
+
+
+
+  &#124; <a href="#pubmethods">Methods</a>
+  
+
+
+
+  &#124; <a href="#inhmethods">Inherited Methods</a>
+
+&#124; <a href="#" onclick="return toggleAllClassInherited()" id="toggleAllClassInherited">[Expand All]</a>
+
+</div><!-- end sum-details-links -->
+<div class="api-level">
+  
+
+
+  
+  
+
+</div>
+</div><!-- end api-info-block -->
+
+
+<!-- ======== START OF CLASS DATA ======== -->
+
+<div id="jd-header">
+    public
+     
+     
+    
+    class
+<h1>MuleEntityManager</h1>
+
+
+
+  
+    extends <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Object.html">Object</a><br/>
+  
+  
+  
+
+  
+  
+      implements 
+      
+        EntityManager 
+      
+  
+  
+
+
+</div><!-- end header -->
+
+<div id="naMessage"></div>
+
+<div id="jd-content" class="api apilevel-">
+<table class="jd-inheritance-table">
+
+
+    <tr>
+        
+        <td colspan="2" class="jd-inheritance-class-cell"><a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Object.html">java.lang.Object</a></td>
+    </tr>
+    
+
+    <tr>
+        
+            <td class="jd-inheritance-space">&nbsp;&nbsp;&nbsp;&#x21b3;</td>
+        
+        <td colspan="1" class="jd-inheritance-class-cell">org.mule.module.jpa.MuleEntityManager</td>
+    </tr>
+    
+
+</table>
+
+
+
+
+
+
+
+<div class="jd-descr">
+
+
+<h2>Class Overview</h2>
+<p><code>MuleEntityManager</code> is a facade around an <code>EntityManager</code> that ensures components making
+ use of the <code>PersistenceContext</code> annotation will get an <code>EntityManager</code> that is aware
+ of the JPA transaction in the flow.
+</p>
+
+
+
+
+
+</div><!-- jd-descr -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="jd-descr">
+
+
+<h2>Summary</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- =========== FIELD SUMMARY =========== -->
+<table id="lfields" class="jd-sumtable"><tr><th colspan="12">Fields</th></tr>
+
+
+    
+      <tr class="alt-color api apilevel-" >
+          <td class="jd-typecol"><nobr>
+          
+          
+          
+          EntityManagerFactory</nobr></td>
+          <td class="jd-linkcol"><a href="../../../../../org/mule/module/jpa/MuleEntityManager.html#entityManagerFactory">entityManagerFactory</a></td>
+          <td class="jd-descrcol" width="100%"></td>
+      </tr>
+      
+    
+
+</table>
+
+
+
+
+
+
+
+<!-- ======== CONSTRUCTOR SUMMARY ======== -->
+<table id="pubctors" class="jd-sumtable"><tr><th colspan="12">Public Constructors</th></tr>
+
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            </nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../org/mule/module/jpa/MuleEntityManager.html#MuleEntityManager(javax.persistence.EntityManagerFactory)">MuleEntityManager</a></span>(EntityManagerFactory entityManagerFactory)</nobr>
+        
+  </td></tr>
+
+
+
+</table>
+
+
+
+
+
+
+<!-- ========== METHOD SUMMARY =========== -->
+<table id="pubmethods" class="jd-sumtable"><tr><th colspan="12">Public Methods</th></tr>
+
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../org/mule/module/jpa/MuleEntityManager.html#clear()">clear</a></span>()</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../org/mule/module/jpa/MuleEntityManager.html#close()">close</a></span>()</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            boolean</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../org/mule/module/jpa/MuleEntityManager.html#contains(java.lang.Object)">contains</a></span>(<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Object.html">Object</a> entity)</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            &lt;T&gt;
+            TypedQuery&lt;T&gt;</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../org/mule/module/jpa/MuleEntityManager.html#createNamedQuery(java.lang.String, java.lang.Class<T>)">createNamedQuery</a></span>(<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/String.html">String</a> name, <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Class.html">Class</a>&lt;T&gt; resultClass)</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            Query</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../org/mule/module/jpa/MuleEntityManager.html#createNamedQuery(java.lang.String)">createNamedQuery</a></span>(<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/String.html">String</a> name)</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            Query</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../org/mule/module/jpa/MuleEntityManager.html#createNativeQuery(java.lang.String)">createNativeQuery</a></span>(<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/String.html">String</a> sqlString)</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            Query</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../org/mule/module/jpa/MuleEntityManager.html#createNativeQuery(java.lang.String, java.lang.Class)">createNativeQuery</a></span>(<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/String.html">String</a> sqlString, <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Class.html">Class</a> resultClass)</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            Query</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../org/mule/module/jpa/MuleEntityManager.html#createNativeQuery(java.lang.String, java.lang.String)">createNativeQuery</a></span>(<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/String.html">String</a> sqlString, <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/String.html">String</a> resultSetMapping)</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            &lt;T&gt;
+            TypedQuery&lt;T&gt;</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../org/mule/module/jpa/MuleEntityManager.html#createQuery(java.lang.String, java.lang.Class<T>)">createQuery</a></span>(<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/String.html">String</a> qlString, <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Class.html">Class</a>&lt;T&gt; resultClass)</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            Query</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../org/mule/module/jpa/MuleEntityManager.html#createQuery(java.lang.String)">createQuery</a></span>(<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/String.html">String</a> qlString)</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            &lt;T&gt;
+            TypedQuery&lt;T&gt;</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../org/mule/module/jpa/MuleEntityManager.html#createQuery(javax.persistence.criteria.CriteriaQuery<T>)">createQuery</a></span>(CriteriaQuery&lt;T&gt; criteriaQuery)</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../org/mule/module/jpa/MuleEntityManager.html#detach(java.lang.Object)">detach</a></span>(<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Object.html">Object</a> entity)</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            &lt;T&gt;
+            T</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../org/mule/module/jpa/MuleEntityManager.html#find(java.lang.Class<T>, java.lang.Object)">find</a></span>(<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Class.html">Class</a>&lt;T&gt; entityClass, <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Object.html">Object</a> primaryKey)</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            &lt;T&gt;
+            T</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../org/mule/module/jpa/MuleEntityManager.html#find(java.lang.Class<T>, java.lang.Object, javax.persistence.LockModeType, java.util.Map<java.lang.String, java.lang.Object>)">find</a></span>(<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Class.html">Class</a>&lt;T&gt; entityClass, <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Object.html">Object</a> primaryKey, LockModeType lockMode, <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/util/Map.html">Map</a>&lt;<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/String.html">String</a>,&nbsp;<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Object.html">Object</a>&gt; properties)</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            &lt;T&gt;
+            T</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../org/mule/module/jpa/MuleEntityManager.html#find(java.lang.Class<T>, java.lang.Object, java.util.Map<java.lang.String, java.lang.Object>)">find</a></span>(<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Class.html">Class</a>&lt;T&gt; entityClass, <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Object.html">Object</a> primaryKey, <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/util/Map.html">Map</a>&lt;<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/String.html">String</a>,&nbsp;<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Object.html">Object</a>&gt; properties)</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            &lt;T&gt;
+            T</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../org/mule/module/jpa/MuleEntityManager.html#find(java.lang.Class<T>, java.lang.Object, javax.persistence.LockModeType)">find</a></span>(<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Class.html">Class</a>&lt;T&gt; entityClass, <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Object.html">Object</a> primaryKey, LockModeType lockMode)</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../org/mule/module/jpa/MuleEntityManager.html#flush()">flush</a></span>()</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            CriteriaBuilder</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../org/mule/module/jpa/MuleEntityManager.html#getCriteriaBuilder()">getCriteriaBuilder</a></span>()</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Object.html">Object</a></nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../org/mule/module/jpa/MuleEntityManager.html#getDelegate()">getDelegate</a></span>()</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            EntityManagerFactory</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../org/mule/module/jpa/MuleEntityManager.html#getEntityManagerFactory()">getEntityManagerFactory</a></span>()</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            FlushModeType</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../org/mule/module/jpa/MuleEntityManager.html#getFlushMode()">getFlushMode</a></span>()</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            LockModeType</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../org/mule/module/jpa/MuleEntityManager.html#getLockMode(java.lang.Object)">getLockMode</a></span>(<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Object.html">Object</a> entity)</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            Metamodel</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../org/mule/module/jpa/MuleEntityManager.html#getMetamodel()">getMetamodel</a></span>()</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/util/Map.html">Map</a>&lt;<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/String.html">String</a>,&nbsp;<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Object.html">Object</a>&gt;</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../org/mule/module/jpa/MuleEntityManager.html#getProperties()">getProperties</a></span>()</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            &lt;T&gt;
+            T</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../org/mule/module/jpa/MuleEntityManager.html#getReference(java.lang.Class<T>, java.lang.Object)">getReference</a></span>(<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Class.html">Class</a>&lt;T&gt; entityClass, <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Object.html">Object</a> primaryKey)</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            EntityTransaction</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../org/mule/module/jpa/MuleEntityManager.html#getTransaction()">getTransaction</a></span>()</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            boolean</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../org/mule/module/jpa/MuleEntityManager.html#isOpen()">isOpen</a></span>()</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../org/mule/module/jpa/MuleEntityManager.html#joinTransaction()">joinTransaction</a></span>()</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../org/mule/module/jpa/MuleEntityManager.html#lock(java.lang.Object, javax.persistence.LockModeType)">lock</a></span>(<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Object.html">Object</a> entity, LockModeType lockMode)</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../org/mule/module/jpa/MuleEntityManager.html#lock(java.lang.Object, javax.persistence.LockModeType, java.util.Map<java.lang.String, java.lang.Object>)">lock</a></span>(<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Object.html">Object</a> entity, LockModeType lockMode, <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/util/Map.html">Map</a>&lt;<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/String.html">String</a>,&nbsp;<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Object.html">Object</a>&gt; properties)</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            &lt;T&gt;
+            T</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../org/mule/module/jpa/MuleEntityManager.html#merge(T)">merge</a></span>(T entity)</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../org/mule/module/jpa/MuleEntityManager.html#persist(java.lang.Object)">persist</a></span>(<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Object.html">Object</a> entity)</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../org/mule/module/jpa/MuleEntityManager.html#refresh(java.lang.Object, javax.persistence.LockModeType)">refresh</a></span>(<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Object.html">Object</a> entity, LockModeType lockMode)</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../org/mule/module/jpa/MuleEntityManager.html#refresh(java.lang.Object, javax.persistence.LockModeType, java.util.Map<java.lang.String, java.lang.Object>)">refresh</a></span>(<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Object.html">Object</a> entity, LockModeType lockMode, <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/util/Map.html">Map</a>&lt;<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/String.html">String</a>,&nbsp;<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Object.html">Object</a>&gt; properties)</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../org/mule/module/jpa/MuleEntityManager.html#refresh(java.lang.Object, java.util.Map<java.lang.String, java.lang.Object>)">refresh</a></span>(<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Object.html">Object</a> entity, <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/util/Map.html">Map</a>&lt;<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/String.html">String</a>,&nbsp;<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Object.html">Object</a>&gt; properties)</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../org/mule/module/jpa/MuleEntityManager.html#refresh(java.lang.Object)">refresh</a></span>(<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Object.html">Object</a> entity)</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../org/mule/module/jpa/MuleEntityManager.html#remove(java.lang.Object)">remove</a></span>(<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Object.html">Object</a> entity)</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../org/mule/module/jpa/MuleEntityManager.html#setFlushMode(javax.persistence.FlushModeType)">setFlushMode</a></span>(FlushModeType flushMode)</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../org/mule/module/jpa/MuleEntityManager.html#setProperty(java.lang.String, java.lang.Object)">setProperty</a></span>(<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/String.html">String</a> propertyName, <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Object.html">Object</a> value)</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            &lt;T&gt;
+            T</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../org/mule/module/jpa/MuleEntityManager.html#unwrap(java.lang.Class<T>)">unwrap</a></span>(<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Class.html">Class</a>&lt;T&gt; cls)</nobr>
+        
+  </td></tr>
+
+
+
+</table>
+
+
+
+
+
+
+
+<!-- ========== METHOD SUMMARY =========== -->
+<table id="inhmethods" class="jd-sumtable"><tr><th>
+  <a href="#" class="toggle-all" onclick="return toggleAllInherited(this, null)">[Expand]</a>
+  <div style="clear:left;">Inherited Methods</div></th></tr>
+
+
+<tr class="api apilevel-" >
+<td colspan="12">
+  <a href="#" onclick="return toggleInherited(this, null)" id="inherited-methods-java.lang.Object" class="jd-expando-trigger closed"
+          ><img id="inherited-methods-java.lang.Object-trigger"
+          src="../../../../../assets/images/triangle-closed.png"
+          class="jd-expando-trigger-img" /></a>
+From class
+
+  <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Object.html">java.lang.Object</a>
+
+<div id="inherited-methods-java.lang.Object">
+  <div id="inherited-methods-java.lang.Object-list"
+        class="jd-inheritedlinks">
+  </div>
+  <div id="inherited-methods-java.lang.Object-summary" style="display: none;">
+    <table class="jd-sumtable-expando">
+    
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Object.html">Object</a></nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">clone</span>()</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            boolean</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">equals</span>(<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Object.html">Object</a> arg0)</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">finalize</span>()</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            final
+            
+            
+            <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Class.html">Class</a>&lt;?&gt;</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">getClass</span>()</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            int</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">hashCode</span>()</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            final
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">notify</span>()</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            final
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">notifyAll</span>()</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/String.html">String</a></nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">toString</span>()</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            final
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">wait</span>()</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            final
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">wait</span>(long arg0, int arg1)</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            final
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">wait</span>(long arg0)</nobr>
+        
+  </td></tr>
+
+
+</table>
+  </div>
+</div>
+</td></tr>
+
+
+
+<tr class="api apilevel-" >
+<td colspan="12">
+  <a href="#" onclick="return toggleInherited(this, null)" id="inherited-methods-javax.persistence.EntityManager" class="jd-expando-trigger closed"
+          ><img id="inherited-methods-javax.persistence.EntityManager-trigger"
+          src="../../../../../assets/images/triangle-closed.png"
+          class="jd-expando-trigger-img" /></a>
+From interface
+
+  javax.persistence.EntityManager
+
+<div id="inherited-methods-javax.persistence.EntityManager">
+  <div id="inherited-methods-javax.persistence.EntityManager-list"
+        class="jd-inheritedlinks">
+  </div>
+  <div id="inherited-methods-javax.persistence.EntityManager-summary" style="display: none;">
+    <table class="jd-sumtable-expando">
+    
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            abstract
+            
+            
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">clear</span>()</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            abstract
+            
+            
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">close</span>()</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            abstract
+            
+            
+            
+            
+            boolean</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">contains</span>(<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Object.html">Object</a> arg0)</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            abstract
+            
+            
+            
+            &lt;T&gt;
+            TypedQuery&lt;T&gt;</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">createNamedQuery</span>(<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/String.html">String</a> arg0, <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Class.html">Class</a>&lt;T&gt; arg1)</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            abstract
+            
+            
+            
+            
+            Query</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">createNamedQuery</span>(<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/String.html">String</a> arg0)</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            abstract
+            
+            
+            
+            
+            Query</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">createNativeQuery</span>(<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/String.html">String</a> arg0)</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            abstract
+            
+            
+            
+            
+            Query</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">createNativeQuery</span>(<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/String.html">String</a> arg0, <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Class.html">Class</a> arg1)</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            abstract
+            
+            
+            
+            
+            Query</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">createNativeQuery</span>(<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/String.html">String</a> arg0, <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/String.html">String</a> arg1)</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            abstract
+            
+            
+            
+            &lt;T&gt;
+            TypedQuery&lt;T&gt;</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">createQuery</span>(<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/String.html">String</a> arg0, <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Class.html">Class</a>&lt;T&gt; arg1)</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            abstract
+            
+            
+            
+            
+            Query</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">createQuery</span>(<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/String.html">String</a> arg0)</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            abstract
+            
+            
+            
+            &lt;T&gt;
+            TypedQuery&lt;T&gt;</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">createQuery</span>(CriteriaQuery&lt;T&gt; arg0)</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            abstract
+            
+            
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">detach</span>(<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Object.html">Object</a> arg0)</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            abstract
+            
+            
+            
+            &lt;T&gt;
+            T</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">find</span>(<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Class.html">Class</a>&lt;T&gt; arg0, <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Object.html">Object</a> arg1)</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            abstract
+            
+            
+            
+            &lt;T&gt;
+            T</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">find</span>(<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Class.html">Class</a>&lt;T&gt; arg0, <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Object.html">Object</a> arg1, LockModeType arg2, <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/util/Map.html">Map</a>&lt;<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/String.html">String</a>,&nbsp;<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Object.html">Object</a>&gt; arg3)</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            abstract
+            
+            
+            
+            &lt;T&gt;
+            T</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">find</span>(<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Class.html">Class</a>&lt;T&gt; arg0, <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Object.html">Object</a> arg1, <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/util/Map.html">Map</a>&lt;<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/String.html">String</a>,&nbsp;<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Object.html">Object</a>&gt; arg2)</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            abstract
+            
+            
+            
+            &lt;T&gt;
+            T</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">find</span>(<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Class.html">Class</a>&lt;T&gt; arg0, <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Object.html">Object</a> arg1, LockModeType arg2)</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            abstract
+            
+            
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">flush</span>()</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            abstract
+            
+            
+            
+            
+            CriteriaBuilder</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">getCriteriaBuilder</span>()</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            abstract
+            
+            
+            
+            
+            <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Object.html">Object</a></nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">getDelegate</span>()</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            abstract
+            
+            
+            
+            
+            EntityManagerFactory</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">getEntityManagerFactory</span>()</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            abstract
+            
+            
+            
+            
+            FlushModeType</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">getFlushMode</span>()</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            abstract
+            
+            
+            
+            
+            LockModeType</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">getLockMode</span>(<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Object.html">Object</a> arg0)</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            abstract
+            
+            
+            
+            
+            Metamodel</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">getMetamodel</span>()</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            abstract
+            
+            
+            
+            
+            <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/util/Map.html">Map</a>&lt;<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/String.html">String</a>,&nbsp;<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Object.html">Object</a>&gt;</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">getProperties</span>()</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            abstract
+            
+            
+            
+            &lt;T&gt;
+            T</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">getReference</span>(<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Class.html">Class</a>&lt;T&gt; arg0, <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Object.html">Object</a> arg1)</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            abstract
+            
+            
+            
+            
+            EntityTransaction</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">getTransaction</span>()</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            abstract
+            
+            
+            
+            
+            boolean</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">isOpen</span>()</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            abstract
+            
+            
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">joinTransaction</span>()</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            abstract
+            
+            
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">lock</span>(<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Object.html">Object</a> arg0, LockModeType arg1)</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            abstract
+            
+            
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">lock</span>(<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Object.html">Object</a> arg0, LockModeType arg1, <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/util/Map.html">Map</a>&lt;<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/String.html">String</a>,&nbsp;<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Object.html">Object</a>&gt; arg2)</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            abstract
+            
+            
+            
+            &lt;T&gt;
+            T</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">merge</span>(T arg0)</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            abstract
+            
+            
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">persist</span>(<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Object.html">Object</a> arg0)</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            abstract
+            
+            
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">refresh</span>(<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Object.html">Object</a> arg0, LockModeType arg1)</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            abstract
+            
+            
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">refresh</span>(<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Object.html">Object</a> arg0, LockModeType arg1, <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/util/Map.html">Map</a>&lt;<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/String.html">String</a>,&nbsp;<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Object.html">Object</a>&gt; arg2)</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            abstract
+            
+            
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">refresh</span>(<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Object.html">Object</a> arg0, <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/util/Map.html">Map</a>&lt;<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/String.html">String</a>,&nbsp;<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Object.html">Object</a>&gt; arg1)</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            abstract
+            
+            
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">refresh</span>(<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Object.html">Object</a> arg0)</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            abstract
+            
+            
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">remove</span>(<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Object.html">Object</a> arg0)</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            abstract
+            
+            
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">setFlushMode</span>(FlushModeType arg0)</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            abstract
+            
+            
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">setProperty</span>(<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/String.html">String</a> arg0, <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Object.html">Object</a> arg1)</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            abstract
+            
+            
+            
+            &lt;T&gt;
+            T</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">unwrap</span>(<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Class.html">Class</a>&lt;T&gt; arg0)</nobr>
+        
+  </td></tr>
+
+
+</table>
+  </div>
+</div>
+</td></tr>
+
+
+</table>
+
+
+</div><!-- jd-descr (summary) -->
+
+<!-- Details -->
+
+
+
+
+
+
+
+
+<!-- XML Attributes -->
+
+
+<!-- Enum Values -->
+
+
+<!-- Constants -->
+
+
+<!-- Fields -->
+
+
+<!-- ========= FIELD DETAIL ======== -->
+<h2>Fields</h2>
+
+
+
+
+<A NAME="entityManagerFactory"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+         
+         
+         
+        EntityManagerFactory
+      </span>
+        entityManagerFactory
+    </h4>
+      <div class="api-level">
+        
+
+
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+
+    
+    </div>
+</div>
+
+
+
+
+<!-- Public ctors -->
+
+
+<!-- ========= CONSTRUCTOR DETAIL ======== -->
+<h2>Public Constructors</h2>
+
+
+
+<A NAME="MuleEntityManager(javax.persistence.EntityManagerFactory)"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+         
+         
+        
+      </span>
+      <span class="sympad">MuleEntityManager</span>
+      <span class="normal">(EntityManagerFactory entityManagerFactory)</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Parameters</h5>
+      <table class="jd-tagtable">
+        <tr>
+          <th>entityManagerFactory</td>
+          <td></td>
+        </tr>
+      </table>
+  </div>
+
+    </div>
+</div>
+
+
+
+
+
+<!-- ========= CONSTRUCTOR DETAIL ======== -->
+<!-- Protected ctors -->
+
+
+
+<!-- ========= METHOD DETAIL ======== -->
+<!-- Public methdos -->
+
+<h2>Public Methods</h2>
+
+
+
+<A NAME="clear()"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+         
+         
+        void
+      </span>
+      <span class="sympad">clear</span>
+      <span class="normal">()</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+
+    </div>
+</div>
+
+
+<A NAME="close()"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+         
+         
+        void
+      </span>
+      <span class="sympad">close</span>
+      <span class="normal">()</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+
+    </div>
+</div>
+
+
+<A NAME="contains(java.lang.Object)"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+         
+         
+        boolean
+      </span>
+      <span class="sympad">contains</span>
+      <span class="normal">(<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Object.html">Object</a> entity)</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Parameters</h5>
+      <table class="jd-tagtable">
+        <tr>
+          <th>entity</td>
+          <td></td>
+        </tr>
+      </table>
+  </div>
+
+    </div>
+</div>
+
+
+<A NAME="createNamedQuery(java.lang.String, java.lang.Class<T>)"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+         
+         
+        TypedQuery&lt;T&gt;
+      </span>
+      <span class="sympad">createNamedQuery</span>
+      <span class="normal">(<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/String.html">String</a> name, <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Class.html">Class</a>&lt;T&gt; resultClass)</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Parameters</h5>
+      <table class="jd-tagtable">
+        <tr>
+          <th>name</td>
+          <td></td>
+        </tr>
+        <tr>
+          <th>resultClass</td>
+          <td></td>
+        </tr>
+      </table>
+  </div>
+
+    </div>
+</div>
+
+
+<A NAME="createNamedQuery(java.lang.String)"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+         
+         
+        Query
+      </span>
+      <span class="sympad">createNamedQuery</span>
+      <span class="normal">(<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/String.html">String</a> name)</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Parameters</h5>
+      <table class="jd-tagtable">
+        <tr>
+          <th>name</td>
+          <td></td>
+        </tr>
+      </table>
+  </div>
+
+    </div>
+</div>
+
+
+<A NAME="createNativeQuery(java.lang.String)"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+         
+         
+        Query
+      </span>
+      <span class="sympad">createNativeQuery</span>
+      <span class="normal">(<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/String.html">String</a> sqlString)</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Parameters</h5>
+      <table class="jd-tagtable">
+        <tr>
+          <th>sqlString</td>
+          <td></td>
+        </tr>
+      </table>
+  </div>
+
+    </div>
+</div>
+
+
+<A NAME="createNativeQuery(java.lang.String, java.lang.Class)"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+         
+         
+        Query
+      </span>
+      <span class="sympad">createNativeQuery</span>
+      <span class="normal">(<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/String.html">String</a> sqlString, <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Class.html">Class</a> resultClass)</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Parameters</h5>
+      <table class="jd-tagtable">
+        <tr>
+          <th>sqlString</td>
+          <td></td>
+        </tr>
+        <tr>
+          <th>resultClass</td>
+          <td></td>
+        </tr>
+      </table>
+  </div>
+
+    </div>
+</div>
+
+
+<A NAME="createNativeQuery(java.lang.String, java.lang.String)"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+         
+         
+        Query
+      </span>
+      <span class="sympad">createNativeQuery</span>
+      <span class="normal">(<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/String.html">String</a> sqlString, <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/String.html">String</a> resultSetMapping)</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Parameters</h5>
+      <table class="jd-tagtable">
+        <tr>
+          <th>sqlString</td>
+          <td></td>
+        </tr>
+        <tr>
+          <th>resultSetMapping</td>
+          <td></td>
+        </tr>
+      </table>
+  </div>
+
+    </div>
+</div>
+
+
+<A NAME="createQuery(java.lang.String, java.lang.Class<T>)"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+         
+         
+        TypedQuery&lt;T&gt;
+      </span>
+      <span class="sympad">createQuery</span>
+      <span class="normal">(<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/String.html">String</a> qlString, <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Class.html">Class</a>&lt;T&gt; resultClass)</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Parameters</h5>
+      <table class="jd-tagtable">
+        <tr>
+          <th>qlString</td>
+          <td></td>
+        </tr>
+        <tr>
+          <th>resultClass</td>
+          <td></td>
+        </tr>
+      </table>
+  </div>
+
+    </div>
+</div>
+
+
+<A NAME="createQuery(java.lang.String)"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+         
+         
+        Query
+      </span>
+      <span class="sympad">createQuery</span>
+      <span class="normal">(<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/String.html">String</a> qlString)</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Parameters</h5>
+      <table class="jd-tagtable">
+        <tr>
+          <th>qlString</td>
+          <td></td>
+        </tr>
+      </table>
+  </div>
+
+    </div>
+</div>
+
+
+<A NAME="createQuery(javax.persistence.criteria.CriteriaQuery<T>)"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+         
+         
+        TypedQuery&lt;T&gt;
+      </span>
+      <span class="sympad">createQuery</span>
+      <span class="normal">(CriteriaQuery&lt;T&gt; criteriaQuery)</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Parameters</h5>
+      <table class="jd-tagtable">
+        <tr>
+          <th>criteriaQuery</td>
+          <td></td>
+        </tr>
+      </table>
+  </div>
+
+    </div>
+</div>
+
+
+<A NAME="detach(java.lang.Object)"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+         
+         
+        void
+      </span>
+      <span class="sympad">detach</span>
+      <span class="normal">(<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Object.html">Object</a> entity)</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Parameters</h5>
+      <table class="jd-tagtable">
+        <tr>
+          <th>entity</td>
+          <td></td>
+        </tr>
+      </table>
+  </div>
+
+    </div>
+</div>
+
+
+<A NAME="find(java.lang.Class<T>, java.lang.Object)"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+         
+         
+        T
+      </span>
+      <span class="sympad">find</span>
+      <span class="normal">(<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Class.html">Class</a>&lt;T&gt; entityClass, <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Object.html">Object</a> primaryKey)</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Parameters</h5>
+      <table class="jd-tagtable">
+        <tr>
+          <th>entityClass</td>
+          <td></td>
+        </tr>
+        <tr>
+          <th>primaryKey</td>
+          <td></td>
+        </tr>
+      </table>
+  </div>
+
+    </div>
+</div>
+
+
+<A NAME="find(java.lang.Class<T>, java.lang.Object, javax.persistence.LockModeType, java.util.Map<java.lang.String, java.lang.Object>)"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+         
+         
+        T
+      </span>
+      <span class="sympad">find</span>
+      <span class="normal">(<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Class.html">Class</a>&lt;T&gt; entityClass, <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Object.html">Object</a> primaryKey, LockModeType lockMode, <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/util/Map.html">Map</a>&lt;<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/String.html">String</a>,&nbsp;<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Object.html">Object</a>&gt; properties)</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Parameters</h5>
+      <table class="jd-tagtable">
+        <tr>
+          <th>entityClass</td>
+          <td></td>
+        </tr>
+        <tr>
+          <th>primaryKey</td>
+          <td></td>
+        </tr>
+        <tr>
+          <th>lockMode</td>
+          <td></td>
+        </tr>
+        <tr>
+          <th>properties</td>
+          <td></td>
+        </tr>
+      </table>
+  </div>
+
+    </div>
+</div>
+
+
+<A NAME="find(java.lang.Class<T>, java.lang.Object, java.util.Map<java.lang.String, java.lang.Object>)"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+         
+         
+        T
+      </span>
+      <span class="sympad">find</span>
+      <span class="normal">(<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Class.html">Class</a>&lt;T&gt; entityClass, <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Object.html">Object</a> primaryKey, <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/util/Map.html">Map</a>&lt;<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/String.html">String</a>,&nbsp;<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Object.html">Object</a>&gt; properties)</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Parameters</h5>
+      <table class="jd-tagtable">
+        <tr>
+          <th>entityClass</td>
+          <td></td>
+        </tr>
+        <tr>
+          <th>primaryKey</td>
+          <td></td>
+        </tr>
+        <tr>
+          <th>properties</td>
+          <td></td>
+        </tr>
+      </table>
+  </div>
+
+    </div>
+</div>
+
+
+<A NAME="find(java.lang.Class<T>, java.lang.Object, javax.persistence.LockModeType)"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+         
+         
+        T
+      </span>
+      <span class="sympad">find</span>
+      <span class="normal">(<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Class.html">Class</a>&lt;T&gt; entityClass, <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Object.html">Object</a> primaryKey, LockModeType lockMode)</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Parameters</h5>
+      <table class="jd-tagtable">
+        <tr>
+          <th>entityClass</td>
+          <td></td>
+        </tr>
+        <tr>
+          <th>primaryKey</td>
+          <td></td>
+        </tr>
+        <tr>
+          <th>lockMode</td>
+          <td></td>
+        </tr>
+      </table>
+  </div>
+
+    </div>
+</div>
+
+
+<A NAME="flush()"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+         
+         
+        void
+      </span>
+      <span class="sympad">flush</span>
+      <span class="normal">()</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+
+    </div>
+</div>
+
+
+<A NAME="getCriteriaBuilder()"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+         
+         
+        CriteriaBuilder
+      </span>
+      <span class="sympad">getCriteriaBuilder</span>
+      <span class="normal">()</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+
+    </div>
+</div>
+
+
+<A NAME="getDelegate()"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+         
+         
+        <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Object.html">Object</a>
+      </span>
+      <span class="sympad">getDelegate</span>
+      <span class="normal">()</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+
+    </div>
+</div>
+
+
+<A NAME="getEntityManagerFactory()"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+         
+         
+        EntityManagerFactory
+      </span>
+      <span class="sympad">getEntityManagerFactory</span>
+      <span class="normal">()</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+
+    </div>
+</div>
+
+
+<A NAME="getFlushMode()"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+         
+         
+        FlushModeType
+      </span>
+      <span class="sympad">getFlushMode</span>
+      <span class="normal">()</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+
+    </div>
+</div>
+
+
+<A NAME="getLockMode(java.lang.Object)"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+         
+         
+        LockModeType
+      </span>
+      <span class="sympad">getLockMode</span>
+      <span class="normal">(<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Object.html">Object</a> entity)</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Parameters</h5>
+      <table class="jd-tagtable">
+        <tr>
+          <th>entity</td>
+          <td></td>
+        </tr>
+      </table>
+  </div>
+
+    </div>
+</div>
+
+
+<A NAME="getMetamodel()"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+         
+         
+        Metamodel
+      </span>
+      <span class="sympad">getMetamodel</span>
+      <span class="normal">()</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+
+    </div>
+</div>
+
+
+<A NAME="getProperties()"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+         
+         
+        <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/util/Map.html">Map</a>&lt;<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/String.html">String</a>,&nbsp;<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Object.html">Object</a>&gt;
+      </span>
+      <span class="sympad">getProperties</span>
+      <span class="normal">()</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+
+    </div>
+</div>
+
+
+<A NAME="getReference(java.lang.Class<T>, java.lang.Object)"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+         
+         
+        T
+      </span>
+      <span class="sympad">getReference</span>
+      <span class="normal">(<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Class.html">Class</a>&lt;T&gt; entityClass, <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Object.html">Object</a> primaryKey)</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Parameters</h5>
+      <table class="jd-tagtable">
+        <tr>
+          <th>entityClass</td>
+          <td></td>
+        </tr>
+        <tr>
+          <th>primaryKey</td>
+          <td></td>
+        </tr>
+      </table>
+  </div>
+
+    </div>
+</div>
+
+
+<A NAME="getTransaction()"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+         
+         
+        EntityTransaction
+      </span>
+      <span class="sympad">getTransaction</span>
+      <span class="normal">()</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+
+    </div>
+</div>
+
+
+<A NAME="isOpen()"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+         
+         
+        boolean
+      </span>
+      <span class="sympad">isOpen</span>
+      <span class="normal">()</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+
+    </div>
+</div>
+
+
+<A NAME="joinTransaction()"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+         
+         
+        void
+      </span>
+      <span class="sympad">joinTransaction</span>
+      <span class="normal">()</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+
+    </div>
+</div>
+
+
+<A NAME="lock(java.lang.Object, javax.persistence.LockModeType)"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+         
+         
+        void
+      </span>
+      <span class="sympad">lock</span>
+      <span class="normal">(<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Object.html">Object</a> entity, LockModeType lockMode)</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Parameters</h5>
+      <table class="jd-tagtable">
+        <tr>
+          <th>entity</td>
+          <td></td>
+        </tr>
+        <tr>
+          <th>lockMode</td>
+          <td></td>
+        </tr>
+      </table>
+  </div>
+
+    </div>
+</div>
+
+
+<A NAME="lock(java.lang.Object, javax.persistence.LockModeType, java.util.Map<java.lang.String, java.lang.Object>)"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+         
+         
+        void
+      </span>
+      <span class="sympad">lock</span>
+      <span class="normal">(<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Object.html">Object</a> entity, LockModeType lockMode, <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/util/Map.html">Map</a>&lt;<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/String.html">String</a>,&nbsp;<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Object.html">Object</a>&gt; properties)</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Parameters</h5>
+      <table class="jd-tagtable">
+        <tr>
+          <th>entity</td>
+          <td></td>
+        </tr>
+        <tr>
+          <th>lockMode</td>
+          <td></td>
+        </tr>
+        <tr>
+          <th>properties</td>
+          <td></td>
+        </tr>
+      </table>
+  </div>
+
+    </div>
+</div>
+
+
+<A NAME="merge(T)"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+         
+         
+        T
+      </span>
+      <span class="sympad">merge</span>
+      <span class="normal">(T entity)</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Parameters</h5>
+      <table class="jd-tagtable">
+        <tr>
+          <th>entity</td>
+          <td></td>
+        </tr>
+      </table>
+  </div>
+
+    </div>
+</div>
+
+
+<A NAME="persist(java.lang.Object)"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+         
+         
+        void
+      </span>
+      <span class="sympad">persist</span>
+      <span class="normal">(<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Object.html">Object</a> entity)</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Parameters</h5>
+      <table class="jd-tagtable">
+        <tr>
+          <th>entity</td>
+          <td></td>
+        </tr>
+      </table>
+  </div>
+
+    </div>
+</div>
+
+
+<A NAME="refresh(java.lang.Object, javax.persistence.LockModeType)"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+         
+         
+        void
+      </span>
+      <span class="sympad">refresh</span>
+      <span class="normal">(<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Object.html">Object</a> entity, LockModeType lockMode)</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Parameters</h5>
+      <table class="jd-tagtable">
+        <tr>
+          <th>entity</td>
+          <td></td>
+        </tr>
+        <tr>
+          <th>lockMode</td>
+          <td></td>
+        </tr>
+      </table>
+  </div>
+
+    </div>
+</div>
+
+
+<A NAME="refresh(java.lang.Object, javax.persistence.LockModeType, java.util.Map<java.lang.String, java.lang.Object>)"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+         
+         
+        void
+      </span>
+      <span class="sympad">refresh</span>
+      <span class="normal">(<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Object.html">Object</a> entity, LockModeType lockMode, <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/util/Map.html">Map</a>&lt;<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/String.html">String</a>,&nbsp;<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Object.html">Object</a>&gt; properties)</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Parameters</h5>
+      <table class="jd-tagtable">
+        <tr>
+          <th>entity</td>
+          <td></td>
+        </tr>
+        <tr>
+          <th>lockMode</td>
+          <td></td>
+        </tr>
+        <tr>
+          <th>properties</td>
+          <td></td>
+        </tr>
+      </table>
+  </div>
+
+    </div>
+</div>
+
+
+<A NAME="refresh(java.lang.Object, java.util.Map<java.lang.String, java.lang.Object>)"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+         
+         
+        void
+      </span>
+      <span class="sympad">refresh</span>
+      <span class="normal">(<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Object.html">Object</a> entity, <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/util/Map.html">Map</a>&lt;<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/String.html">String</a>,&nbsp;<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Object.html">Object</a>&gt; properties)</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Parameters</h5>
+      <table class="jd-tagtable">
+        <tr>
+          <th>entity</td>
+          <td></td>
+        </tr>
+        <tr>
+          <th>properties</td>
+          <td></td>
+        </tr>
+      </table>
+  </div>
+
+    </div>
+</div>
+
+
+<A NAME="refresh(java.lang.Object)"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+         
+         
+        void
+      </span>
+      <span class="sympad">refresh</span>
+      <span class="normal">(<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Object.html">Object</a> entity)</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Parameters</h5>
+      <table class="jd-tagtable">
+        <tr>
+          <th>entity</td>
+          <td></td>
+        </tr>
+      </table>
+  </div>
+
+    </div>
+</div>
+
+
+<A NAME="remove(java.lang.Object)"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+         
+         
+        void
+      </span>
+      <span class="sympad">remove</span>
+      <span class="normal">(<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Object.html">Object</a> entity)</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Parameters</h5>
+      <table class="jd-tagtable">
+        <tr>
+          <th>entity</td>
+          <td></td>
+        </tr>
+      </table>
+  </div>
+
+    </div>
+</div>
+
+
+<A NAME="setFlushMode(javax.persistence.FlushModeType)"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+         
+         
+        void
+      </span>
+      <span class="sympad">setFlushMode</span>
+      <span class="normal">(FlushModeType flushMode)</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Parameters</h5>
+      <table class="jd-tagtable">
+        <tr>
+          <th>flushMode</td>
+          <td></td>
+        </tr>
+      </table>
+  </div>
+
+    </div>
+</div>
+
+
+<A NAME="setProperty(java.lang.String, java.lang.Object)"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+         
+         
+        void
+      </span>
+      <span class="sympad">setProperty</span>
+      <span class="normal">(<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/String.html">String</a> propertyName, <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Object.html">Object</a> value)</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Parameters</h5>
+      <table class="jd-tagtable">
+        <tr>
+          <th>propertyName</td>
+          <td></td>
+        </tr>
+        <tr>
+          <th>value</td>
+          <td></td>
+        </tr>
+      </table>
+  </div>
+
+    </div>
+</div>
+
+
+<A NAME="unwrap(java.lang.Class<T>)"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+         
+         
+        T
+      </span>
+      <span class="sympad">unwrap</span>
+      <span class="normal">(<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Class.html">Class</a>&lt;T&gt; cls)</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Parameters</h5>
+      <table class="jd-tagtable">
+        <tr>
+          <th>cls</td>
+          <td></td>
+        </tr>
+      </table>
+  </div>
+
+    </div>
+</div>
+
+
+
+
+
+<!-- ========= METHOD DETAIL ======== -->
+
+
+
+<!-- ========= END OF CLASS DATA ========= -->
+<A NAME="navbar_top"></A>
+
+<div id="footer">
+Generated by <a href="http://www.mulesoft.com/devkit">Mule DevKit</a>. Document generation technology based on <a href="http://code.google.com/p/doclava/">Google's Doclava</a>.
+</div> <!-- end footer -->
+
+</div> <!-- jd-content -->
+
+</div><!-- end doc-content -->
+
+</div> <!-- end body-content --> 
+
+<script type="text/javascript">
+init(); /* initialize mule-developer-docs.js */
+</script>
+
+</body>
+</html>
