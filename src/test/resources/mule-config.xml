@@ -51,19 +51,19 @@
 
     <flow name="testInsert">
         <transactional>
-            <jpa:persist/>
+            <jpa:persist entity-ref="#[payload:]"/>
         </transactional>
     </flow>
 
     <flow name="testDetach">
         <transactional>
-            <jpa:detach/>
+            <jpa:detach entity-ref="#[payload:]"/>
         </transactional>
     </flow>
 
     <flow name="testMerge">
         <transactional>
-            <jpa:merge/>
+            <jpa:merge entity-ref="#[payload:]"/>
         </transactional>
     </flow>
 
@@ -99,14 +99,14 @@
 
     <flow name="testTransactionalInsertAndQuery">
         <transactional>
-            <jpa:persist/>
+            <jpa:persist entity-ref="#[payload:]"/>
             <jpa:query statement="from Dog dog where dog.name = 'Cujo'"/>
         </transactional>
     </flow>
 
     <flow name="testPersistenceContext">
         <transactional>
-            <jpa:persist/>
+            <jpa:persist entity-ref="#[payload:]"/>
             <component class="service.DogServiceImpl"/>
             <jpa:query statement="from Dog dog where dog.name = 'Cujo'"/>
         </transactional>

@@ -1,19 +1,19 @@
 <!-- BEGIN_INCLUDE(jpa:query) -->
-<jpa:query statement="select * from Dog" queryParameters="#[payload:]" />
+<jpa:query statement="select * from Dog"/>
 <!-- END_INCLUDE(jpa:query) -->
 
 <!-- BEGIN_INCLUDE(jpa:persist) -->
-<jpa:persist/>
+<jpa:persist entity-ref="#[payload:]"/>
 <!-- END_INCLUDE(jpa:persist) -->
 
 <!-- BEGIN_INCLUDE(jpa:merge) -->
-<jpa:merge />
+<jpa:merge entity-ref="#[payload:]"/>
 <!-- END_INCLUDE(jpa:merge) -->
 
 <!-- BEGIN_INCLUDE(jpa:find) -->
-<jpa:find/>
+<jpa:find entityClass="foo" id-ref="#[payload:]"/>
 <!-- END_INCLUDE(jpa:find) -->
 
 <!-- BEGIN_INCLUDE(jpa:detach) -->
-<jpa:detach/>
+<jpa:detach entity-ref="#[payload:]"/>
 <!-- END_INCLUDE(jpa:detach) -->
