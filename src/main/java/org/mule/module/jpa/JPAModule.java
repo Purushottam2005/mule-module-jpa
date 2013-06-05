@@ -797,7 +797,7 @@ import java.util.Map;
  *
  * @author John D'Emic <john.demic@mulesoft.com>
  */
-@Module(name = "jpa", schemaVersion = "1.0")
+@Module(name = "jpa", schemaVersion = "1.0", friendlyName = "Java Persistence API")
 @Icons(connectorSmall = "../../../icons/JPAModule-connector-24x16.png",
         connectorLarge = "../../../icons/JPAModule-connector-48x32.png",
         endpointSmall = "../../../icons/JPAModule-endpoint-24x16.png",
