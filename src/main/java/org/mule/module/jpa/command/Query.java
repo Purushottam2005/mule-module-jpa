@@ -787,29 +787,38 @@ public class Query implements JPACommand {
 
     protected transient Log logger = LogFactory.getLog(getClass());
 
-    public Object execute(EntityManager entityManager, Object payload, Map<String, Object> parameters) throws Exception {
+    public Object execute(EntityManager entityManager, Object payload, Map<String, Object> parameters, Boolean flush)
+            throws Exception {
 
         Object queryParameters = parameters.get("queryParameters");
 
+        Object result;
         if (queryParameters instanceof CriteriaQuery) {
             logger.debug("Executing CriteriaQuery: " + queryParameters);
-            return entityManager.createQuery((CriteriaQuery) queryParameters).getResultList();
+            result = entityManager.createQuery((CriteriaQuery) queryParameters).getResultList();
         } else if (parameters.containsKey("namedQuery")) {
             logger.debug("Executing Named Query: " + parameters.get("namedQuery"));
             javax.persistence.Query query = entityManager.createNamedQuery((String) parameters.get("namedQuery"));
             if (queryParameters != null) {
                 setParameters(queryParameters, query);
             }
-            return query.getResultList();
+            result = query.getResultList();
         } else if (parameters.containsKey("statement")) {
             logger.debug("Executing JPQL statement: " + parameters.get("statement"));
             javax.persistence.Query query = entityManager.createQuery((String) parameters.get("statement"));
             if (queryParameters != null) {
                 setParameters(queryParameters, query);
             }
-            return query.getResultList();
+            result = query.getResultList();
+        } else {
+            throw new JPAException("Couldn't resolve query from either the query parameters or the statement attribute");
         }
-        throw new JPAException("Couldn't resolve query from either the query parameters or the statement attribute");
+
+        if (flush != null && flush) {
+            entityManager.flush();
+        }
+
+        return result;
     }
 
     void setParameters(Object entity, javax.persistence.Query query) {

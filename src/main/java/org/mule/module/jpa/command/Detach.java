@@ -784,10 +784,15 @@ public class Detach implements JPACommand {
 
     protected transient Log logger = LogFactory.getLog(getClass());
 
-    public Object execute(EntityManager entityManager, Object entity, Map<String, Object> parameters)
+    public Object execute(EntityManager entityManager, Object entity, Map<String, Object> parameters, Boolean flush)
             throws Exception {
         logger.debug("Detaching entity: " + entity);
         entityManager.detach(entity);
+
+        if (flush != null && flush) {
+            entityManager.flush();
+        }
+
         return entity;
     }
 }

@@ -56,7 +56,6 @@
             <artifactId>hibernate-core</artifactId>
             <version>3.6.3.Final</version>
             <scope>test</scope>
-
         </dependency>
         <dependency>
             <groupId>org.hibernate</groupId>

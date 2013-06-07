@@ -785,8 +785,9 @@ public interface JPACommand {
      * @param payload       the message's payload.  Typically an instance of an entity class, but could also be a primary key
      *                      or query parameters depending on the operation.
      * @param parameters    additional parameters to pass to the request
+     * @param flush         if set to true then call flush() on the entityManager
      * @return the result of the JPA operation
      * @throws Exception
      */
-    Object execute(EntityManager entityManager, Object payload, Map<String, Object> parameters) throws Exception;
+    Object execute(EntityManager entityManager, Object payload, Map<String, Object> parameters, Boolean flush) throws Exception;
 }

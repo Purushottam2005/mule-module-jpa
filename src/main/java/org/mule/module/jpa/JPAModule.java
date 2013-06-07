@@ -838,12 +838,13 @@ public class JPAModule implements MuleContextAware {
      * @param namedQuery      a named query to execute
      * @param queryParameters the query parameters
      * @param criteria        the CriteriaQuery
+     * @param flush           flush the session if true
      * @return The query results
      * @throws Exception An exception when there's an error
      */
     @Processor
     public Object query(@Optional CriteriaQuery criteria, @Optional String statement, @Optional String namedQuery,
-                        @Optional Object queryParameters)
+                        @Optional Object queryParameters, @Optional Boolean flush)
             throws Exception {
 
         if (logger.isDebugEnabled()) {
@@ -874,7 +875,7 @@ public class JPAModule implements MuleContextAware {
 
         parameterMap.put("queryParameters", queryParameters);
 
-        return perform(criteria, new Query(), parameterMap);
+        return perform(criteria, new Query(), parameterMap, flush);
     }
 
     /**
@@ -883,13 +884,14 @@ public class JPAModule implements MuleContextAware {
      * {@sample.xml ../../../doc/JPAModule-connector.xml.sample jpa:persist}
      *
      * @param entity The entity to persist.
+     * @param flush           flush the session if true
      * @return the persisted object
      * @throws Exception An exception when there's an error
      */
     @Processor
-    public Object persist(Object entity) throws Exception {
+    public Object persist(Object entity, @Optional Boolean flush) throws Exception {
         logger.debug("Persisting: " + entity);
-        return perform(entity, new Persist(), null);
+        return perform(entity, new Persist(), null, flush);
     }
 
     /**
@@ -898,13 +900,14 @@ public class JPAModule implements MuleContextAware {
      * {@sample.xml ../../../doc/JPAModule-connector.xml.sample jpa:merge}
      *
      * @param entity The entity to persist.
+     * @param flush           flush the session if true
      * @return the merged object
      * @throws Exception An exception when there's an error
      */
     @Processor
-    public Object merge(Object entity) throws Exception {
+    public Object merge(Object entity, @Optional Boolean flush) throws Exception {
         logger.debug("Merging: " + entity);
-        return perform(entity, new Merge(), null);
+        return perform(entity, new Merge(), null, flush);
     }
 
     /**
@@ -914,17 +917,18 @@ public class JPAModule implements MuleContextAware {
      *
      * @param entityClass The class of the entity to find.
      * @param id          The ID of the entity to find.
+     * @param flush           flush the session if true
      * @return The entity or null if it isn't found.
      * @throws Exception An exception when there's an error
      */
     @Processor
-    public Object find(String entityClass, Object id) throws Exception {
+    public Object find(String entityClass, Object id, @Optional Boolean flush) throws Exception {
         logger.debug(String.format("Finding entity of class: %s with primary key: %s", entityClass,
                id));
         Map<String, Object> parameters = new HashMap<String, Object>();
         parameters.put("entityClass", entityClass);
         parameters.put("id", id);
-        return perform(id, new Find(), parameters);
+        return perform(id, new Find(), parameters, flush);
     }
 
     /**
@@ -933,19 +937,20 @@ public class JPAModule implements MuleContextAware {
      * {@sample.xml ../../../doc/JPAModule-connector.xml.sample jpa:detach}
      *
      * @param entity The entity to detach.
+     * @param flush           flush the session if true
      * @return the inserted object
      * @throws Exception An exception when there's an error
      */
     @Processor
-    public Object detach(Object entity) throws Exception {
+    public Object detach(Object entity, @Optional Boolean flush) throws Exception {
         logger.debug("Detaching: " + entity);
-        return perform(entity, new Detach(), null);
+        return perform(entity, new Detach(), null, flush);
     }
 
     /**
      * Command pattern implementation for JPA commands.
      */
-    Object perform(Object object, JPACommand command, Map<String, Object> parameters) throws Exception {
+    Object perform(Object object, JPACommand command, Map<String, Object> parameters, Boolean flush) throws Exception {
 
         logger.debug(String.format("Executing JPA command with message: %s, command: %s and parameters: %s",
                 object, command, parameters));
@@ -956,7 +961,8 @@ public class JPAModule implements MuleContextAware {
             throw new IllegalStateException("Could not obtain an EntityManager");
         }
 
-        return command.execute(entityManager, object, parameters);
+        if (flush == null) flush = false;
+        return command.execute(entityManager, object, parameters, flush);
     }
 
 
