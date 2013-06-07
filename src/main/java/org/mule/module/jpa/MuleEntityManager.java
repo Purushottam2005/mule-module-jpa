@@ -770,9 +770,6 @@
 
 package org.mule.module.jpa;
 
-import org.mule.api.transaction.Transaction;
-import org.mule.transaction.TransactionCoordination;
-
 import javax.persistence.*;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;

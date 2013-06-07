@@ -775,9 +775,6 @@ import org.mule.api.transaction.Transaction;
 import org.mule.api.transaction.TransactionException;
 import org.mule.api.transaction.UniversalTransactionFactory;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-
 /**
  * <code>TransactionFactory</code> implementation used to create <code>JPATransactions</code>
  */
