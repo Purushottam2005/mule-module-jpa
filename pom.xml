@@ -147,11 +147,12 @@
     </repositories>
 
     <scm>
-        <connection>scm:git:git://github.com:mulesoft/mule-module-jpa.git
+        <connection>scm:git:git@ithub.com:mulesoft/mule-module-jpa.git
         </connection>
         <developerConnection>
             scm:git:git@github.com:mulesoft/mule-module-jpa.git
         </developerConnection>
         <url>http://github.com/mulesoft/mule-module-jpa</url>
     </scm>
+
 </project>
