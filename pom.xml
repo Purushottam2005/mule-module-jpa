@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.mule.module.jpa</groupId>
     <artifactId>mule-module-jpa</artifactId>
-    <version>1.2-SNAPSHOT</version>
+    <version>1.1-SNAPSHOT</version>
     <packaging>mule-module</packaging>
     <name>Mule Java Persistence API Module</name>
 
@@ -131,7 +131,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-release-plugin</artifactId>
-        <version>2.4.1</version>
+        <version>2.3.2</version>
       </plugin>
     </plugins>
   </build>
@@ -162,7 +162,6 @@
             scm:git:git@github.com:mulesoft/mule-module-jpa.git
         </developerConnection>
         <url>http://github.com/mulesoft/mule-module-jpa</url>
-      <tag>HEAD</tag>
-  </scm>
+    </scm>
 
 </project>
