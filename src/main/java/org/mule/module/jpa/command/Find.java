@@ -792,7 +792,7 @@ public class Find implements JPACommand {
 
         Object result = entityManager.find(Class.forName((String) parameters.get("entityClass")), primaryKey);
 
-        if (flush != null && flush) {
+        if (flush) {
             entityManager.flush();
         }
 

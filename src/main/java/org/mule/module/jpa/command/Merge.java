@@ -790,7 +790,7 @@ public class Merge implements JPACommand {
 
         entityManager.merge(entity);
 
-        if (flush != null && flush) {
+        if (flush) {
             entityManager.flush();
         }
         return entity;

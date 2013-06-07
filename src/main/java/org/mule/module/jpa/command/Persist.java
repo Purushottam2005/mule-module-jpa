@@ -790,7 +790,7 @@ public class Persist implements JPACommand {
 
         entityManager.persist(entity);
 
-        if (flush != null && flush) {
+        if (flush) {
             entityManager.flush();
         }
 

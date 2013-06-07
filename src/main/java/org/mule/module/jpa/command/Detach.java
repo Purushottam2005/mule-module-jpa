@@ -789,7 +789,7 @@ public class Detach implements JPACommand {
         logger.debug("Detaching entity: " + entity);
         entityManager.detach(entity);
 
-        if (flush != null && flush) {
+        if (flush) {
             entityManager.flush();
         }
 

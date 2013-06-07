@@ -780,6 +780,7 @@ import org.mule.api.annotations.Configurable;
 import org.mule.api.annotations.Module;
 import org.mule.api.annotations.Processor;
 import org.mule.api.annotations.display.Icons;
+import org.mule.api.annotations.param.Default;
 import org.mule.api.annotations.param.Optional;
 import org.mule.api.context.MuleContextAware;
 import org.mule.module.jpa.command.*;
@@ -844,7 +845,7 @@ public class JPAModule implements MuleContextAware {
      */
     @Processor
     public Object query(@Optional CriteriaQuery criteria, @Optional String statement, @Optional String namedQuery,
-                        @Optional Object queryParameters, @Optional Boolean flush)
+                        @Optional Object queryParameters, @Optional @Default("false")  Boolean flush)
             throws Exception {
 
         if (logger.isDebugEnabled()) {
@@ -889,7 +890,7 @@ public class JPAModule implements MuleContextAware {
      * @throws Exception An exception when there's an error
      */
     @Processor
-    public Object persist(Object entity, @Optional Boolean flush) throws Exception {
+    public Object persist(Object entity, @Optional  @Default("false") Boolean flush) throws Exception {
         logger.debug("Persisting: " + entity);
         return perform(entity, new Persist(), null, flush);
     }
@@ -905,7 +906,7 @@ public class JPAModule implements MuleContextAware {
      * @throws Exception An exception when there's an error
      */
     @Processor
-    public Object merge(Object entity, @Optional Boolean flush) throws Exception {
+    public Object merge(Object entity, @Optional  @Default("false") Boolean flush) throws Exception {
         logger.debug("Merging: " + entity);
         return perform(entity, new Merge(), null, flush);
     }
@@ -922,7 +923,7 @@ public class JPAModule implements MuleContextAware {
      * @throws Exception An exception when there's an error
      */
     @Processor
-    public Object find(String entityClass, Object id, @Optional Boolean flush) throws Exception {
+    public Object find(String entityClass, Object id, @Optional  @Default("false") Boolean flush) throws Exception {
         logger.debug(String.format("Finding entity of class: %s with primary key: %s", entityClass,
                id));
         Map<String, Object> parameters = new HashMap<String, Object>();
@@ -942,7 +943,7 @@ public class JPAModule implements MuleContextAware {
      * @throws Exception An exception when there's an error
      */
     @Processor
-    public Object detach(Object entity, @Optional Boolean flush) throws Exception {
+    public Object detach(Object entity, @Optional  @Default("false") Boolean flush) throws Exception {
         logger.debug("Detaching: " + entity);
         return perform(entity, new Detach(), null, flush);
     }
@@ -961,7 +962,6 @@ public class JPAModule implements MuleContextAware {
             throw new IllegalStateException("Could not obtain an EntityManager");
         }
 
-        if (flush == null) flush = false;
         return command.execute(entityManager, object, parameters, flush);
     }
 

@@ -814,7 +814,7 @@ public class Query implements JPACommand {
             throw new JPAException("Couldn't resolve query from either the query parameters or the statement attribute");
         }
 
-        if (flush != null && flush) {
+        if (flush) {
             entityManager.flush();
         }
 
