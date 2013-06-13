@@ -145,23 +145,26 @@
         </repository>
         <repository>
             <id>mulesoft-snapshots</id>
-            <name>MuleSoft Snapshots Repository</name>
+            <name>MuleSoft Releases Repository</name>
             <url>http://repository.mulesoft.org/snapshots/</url>
             <layout>default</layout>
         </repository>
-        <repository>
-            <id>codehaus-releases</id>
-            <name>CodeHaus Releases</name>
-            <url>http://repository.codehaus.org/</url>
-        </repository>
     </repositories>
 
+
+ <scm>
+        <connection>scm:git:git://github.com:mulesoft/mule-module-jpa.git</connection>
+        <developerConnection>scm:git:git@github.com:mulesoft/mule-module-jpa.git</developerConnection>
+        <url>http://github.com/mulesoft/mongo-connector</url>
+    </scm>
+
+<!--
     <scm>
        <connection>scm:git:git@github.com:mulesoft/mule-module-jpa.git</connection>
         <developerConnection>
             scm:git:git@github.com:mulesoft/mule-module-jpa.git
         </developerConnection>
         <url>http://github.com/mulesoft/mule-module-jpa</url>
-    </scm>
+    </scm> -->
 
 </project>
