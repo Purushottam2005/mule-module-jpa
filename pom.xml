@@ -10,6 +10,8 @@
 
     <properties>
         <spring.version>3.2.1.RELEASE</spring.version>
+        <category>Community</category>
+        <licensePath>LICENSE.md</licensePath>
     </properties> 
 
     <parent>
