@@ -6,6 +6,10 @@
 <jpa:persist entity-ref="#[payload:]"/>
 <!-- END_INCLUDE(jpa:persist) -->
 
+<!-- BEGIN_INCLUDE(jpa:upsert) -->
+<jpa:upsert entity-ref="#[payload]" id-ref="#[payload.id]" fields="name" flush="false"/>
+<!-- END_INCLUDE(jpa:upsert) -->
+
 <!-- BEGIN_INCLUDE(jpa:merge) -->
 <jpa:merge entity-ref="#[payload:]"/>
 <!-- END_INCLUDE(jpa:merge) -->

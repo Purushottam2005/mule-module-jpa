@@ -794,8 +794,7 @@ import java.util.Map;
 
 import static org.junit.Assert.*;
 
-public class JPAModuleModuleTest extends FunctionalTestCase
-{
+public class JPAModuleModuleTest extends FunctionalTestCase {
     @Override
     protected String getConfigResources() {
         return "mule-config.xml";
@@ -818,6 +817,7 @@ public class JPAModuleModuleTest extends FunctionalTestCase
 
         runFlowWithPayloadAndExpect("testTransactionalInsertAndQuery", expectedResults, dog);
     }
+
     @Test
     public void testCanInjectPersistenceContext() throws Exception {
         Dog dog = new Dog();
@@ -838,6 +838,22 @@ public class JPAModuleModuleTest extends FunctionalTestCase
         assertTrue(dog.getId() > 0);
     }
 
+
+    @Test
+    public void testCanUpsert() throws Exception {
+        Dog dog = new Dog();
+        dog.setName("Cujo");
+        runFlowWithPayloadAndExpect("testUpsert", dog, dog);
+        assertNotNull(dog.getId());
+        assertTrue(dog.getId() > 0);
+        Long id = dog.getId();
+        dog.setName("Bear");
+        runFlowWithPayloadAndExpect("testUpsert", dog, dog);
+        assertNotNull(dog.getId());
+        assertTrue(dog.getId() > 0);
+        assertEquals("Bear", dog.getName());
+        assertEquals(id,dog.getId());
+    }
 
 
     @Test
@@ -932,8 +948,8 @@ public class JPAModuleModuleTest extends FunctionalTestCase
         List<Dog> expectedResults = new ArrayList<Dog>();
         expectedResults.add(dog);
 
-        Map<String,Object> parameters = new HashMap<String,Object>();
-        parameters.put("name","Cujo");
+        Map<String, Object> parameters = new HashMap<String, Object>();
+        parameters.put("name", "Cujo");
         runFlowWithPayloadAndExpect("testQueryWithMapParameters", expectedResults, parameters);
     }
 
@@ -952,8 +968,8 @@ public class JPAModuleModuleTest extends FunctionalTestCase
         List<Dog> expectedResults = new ArrayList<Dog>();
         expectedResults.add(dog);
 
-        Map<String,Object> parameters = new HashMap<String,Object>();
-        parameters.put("name","Cujo");
+        Map<String, Object> parameters = new HashMap<String, Object>();
+        parameters.put("name", "Cujo");
 
         runFlowWithPayloadAndExpect("testNamedQuery", expectedResults, parameters);
     }

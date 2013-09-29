@@ -773,9 +773,12 @@
  */
 package org.mule.module.jpa;
 
+import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.mule.api.MuleContext;
+import org.mule.api.MuleEvent;
+import org.mule.api.MuleMessage;
 import org.mule.api.annotations.Configurable;
 import org.mule.api.annotations.Module;
 import org.mule.api.annotations.Processor;
@@ -845,7 +848,7 @@ public class JPAModule implements MuleContextAware {
      */
     @Processor
     public Object query(@Optional CriteriaQuery criteria, @Optional String statement, @Optional String namedQuery,
-                        @Optional Object queryParameters, @Optional @Default("false")  Boolean flush)
+                        @Optional Object queryParameters, @Optional @Default("false") Boolean flush)
             throws Exception {
 
         if (logger.isDebugEnabled()) {
@@ -885,14 +888,49 @@ public class JPAModule implements MuleContextAware {
      * {@sample.xml ../../../doc/JPAModule-connector.xml.sample jpa:persist}
      *
      * @param entity The entity to persist.
-     * @param flush           flush the session if true
+     * @param flush  flush the session if true
      * @return the persisted object
      * @throws Exception An exception when there's an error
      */
     @Processor
-    public Object persist(Object entity, @Optional  @Default("false") Boolean flush) throws Exception {
+    public Object persist(Object entity, @Optional @Default("false") Boolean flush) throws Exception {
         logger.debug("Persisting: " + entity);
         return perform(entity, new Persist(), null, flush);
+    }
+
+    /**
+     * Upserts an entity
+     * <p/>
+     * {@sample.xml ../../../doc/JPAModule-connector.xml.sample jpa:upsert}
+     *
+     * @param entity The entity to upsert.
+     * @param id     the id of the object to lookup
+     * @param fields the fields to update
+     * @param flush  flush the sesssion if true
+     * @return the upserted entity
+     * @throws Exception An exception when there's an error.
+     */
+    @Processor
+    public Object upsert(Object entity, Object id, String fields, @Optional @Default("false") boolean flush)
+            throws Exception {
+        logger.debug("Upserting: " + entity);
+
+        Object result;
+
+        if (id == null) {
+            result = persist(entity, flush);
+        } else {
+            result = find(entity.getClass().getCanonicalName(), id, flush);
+            if (result == null) {
+                result = persist(entity, flush);
+            } else {
+                for (String field : fields.split(",")) {
+                    BeanUtils.setProperty(result, field, BeanUtils.getProperty(entity, field));
+                }
+                result = merge(entity, flush);
+            }
+        }
+        return result;
     }
 
     /**
@@ -901,12 +939,12 @@ public class JPAModule implements MuleContextAware {
      * {@sample.xml ../../../doc/JPAModule-connector.xml.sample jpa:merge}
      *
      * @param entity The entity to persist.
-     * @param flush           flush the session if true
+     * @param flush  flush the session if true
      * @return the merged object
      * @throws Exception An exception when there's an error
      */
     @Processor
-    public Object merge(Object entity, @Optional  @Default("false") Boolean flush) throws Exception {
+    public Object merge(Object entity, @Optional @Default("false") Boolean flush) throws Exception {
         logger.debug("Merging: " + entity);
         return perform(entity, new Merge(), null, flush);
     }
@@ -918,14 +956,14 @@ public class JPAModule implements MuleContextAware {
      *
      * @param entityClass The class of the entity to find.
      * @param id          The ID of the entity to find.
-     * @param flush           flush the session if true
+     * @param flush       flush the session if true
      * @return The entity or null if it isn't found.
      * @throws Exception An exception when there's an error
      */
     @Processor
-    public Object find(String entityClass, Object id, @Optional  @Default("false") Boolean flush) throws Exception {
+    public Object find(String entityClass, Object id, @Optional @Default("false") Boolean flush) throws Exception {
         logger.debug(String.format("Finding entity of class: %s with primary key: %s", entityClass,
-               id));
+                id));
         Map<String, Object> parameters = new HashMap<String, Object>();
         parameters.put("entityClass", entityClass);
         parameters.put("id", id);
@@ -938,12 +976,12 @@ public class JPAModule implements MuleContextAware {
      * {@sample.xml ../../../doc/JPAModule-connector.xml.sample jpa:detach}
      *
      * @param entity The entity to detach.
-     * @param flush           flush the session if true
+     * @param flush  flush the session if true
      * @return the inserted object
      * @throws Exception An exception when there's an error
      */
     @Processor
-    public Object detach(Object entity, @Optional  @Default("false") Boolean flush) throws Exception {
+    public Object detach(Object entity, @Optional @Default("false") Boolean flush) throws Exception {
         logger.debug("Detaching: " + entity);
         return perform(entity, new Detach(), null, flush);
     }

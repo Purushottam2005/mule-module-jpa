@@ -52,6 +52,12 @@
         </transactional>
     </flow>
 
+    <flow name="testUpsert">
+        <transactional>
+            <jpa:upsert entity-ref="#[payload]" id-ref="#[payload.id]" fields="name"/>
+        </transactional>
+    </flow>
+
     <flow name="testDetach">
         <transactional>
             <jpa:detach entity-ref="#[payload:]"/>
